@@ -40,7 +40,7 @@ class CreateProductsTable extends Migration
                 ->on('categories')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable()->default(null);
             $table->integer('quantity')->nullable()->default(null);
             $table->float('price');
         });
