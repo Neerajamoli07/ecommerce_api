@@ -61,33 +61,33 @@ class LoginController extends BaseController
         // } else {
         //     return $this->sendResponse("success", 'User login successfully.');
         // }
-        if(User::where('email', $request->get('email'))->exists()){
-            $user = User::where('email', $request->get('email'))->first();
-            $auth = Hash::check($request->get('password'), $user->password);
-            if($user && auth){
+      //   if(User::where('email', $request->get('email'))->exists()){
+      //       $user = User::where('email', $request->get('email'))->first();
+      //       $auth = Hash::check($request->get('password'), $user->password);
+      //       if($user && auth){
          
-               $user->rollApiKey(); //Model Function
+      //          $user->rollApiKey(); //Model Function
          
-               return response(array(
-                  'currentUser' => $user,
-                  'message' => 'Authorization Successful!',
-               ));
-            }
-         }
-         return response(array(
-            'message' => 'Unauthorized, check your credentials.',
-         ), 401);
+      //          return response(array(
+      //             'currentUser' => $user,
+      //             'message' => 'Authorization Successful!',
+      //          ));
+      //       }
+      //    }
+      //    return response(array(
+      //       'message' => 'Unauthorized, check your credentials.',
+      //    ), 401);
     }
 
     /**
  * Roll API Key
  */
-public function rollApiKey(){
-    do{
-       $this->api_token = str_random(30);
-    }while($this->where('api_token', $this->api_token)->exists());
-    $this->save();
- }
+// public function rollApiKey(){
+//     do{
+//        $this->api_token = str_random(30);
+//     }while($this->where('api_token', $this->api_token)->exists());
+//     $this->save();
+//  }
 
     
 }

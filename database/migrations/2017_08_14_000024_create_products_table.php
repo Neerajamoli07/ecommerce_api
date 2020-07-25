@@ -23,11 +23,11 @@ class CreateProductsTable extends Migration
         Schema::create($this->set_table, function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug', 45);
-            $table->string('name', 45);
-            $table->mediumText('description');
-            $table->string('a_img', 45);
-            $table->string('b_img', 45);
-            $table->string('c_img', 45);
+            $table->string('name', 45)->nullable()->default(null);
+            $table->mediumText('description')->nullable()->default(null);
+            $table->string('a_img', 45)->nullable()->default(null);
+            $table->string('b_img', 45)->nullable()->default(null);
+            $table->string('c_img', 45)->nullable()->default(null);
             $table->integer('brand_id')->unsigned()->index();
             $table->foreign('brand_id')
                 ->references('brand_id')
