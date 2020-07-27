@@ -74,11 +74,8 @@ class ArticlesController extends Controller
     {
         
         $data = $this->proccesData($request);
-        echo '<pre>'; print_r($data);
         $product = Product::create($data);
-        echo '<pre>'; print_r($product);
-        die;
-        $product->size()->attach($data['size_id']);
+        $product->size()->attach($request->input('size'));
         Session::flash('flash_message', 'Product successfully added!');
         return redirect()->back();
     }
@@ -150,7 +147,7 @@ class ArticlesController extends Controller
     public function proccesData($request)
     {
         $data = $request->except('a_img','size');
-        $data['size_id'] = $request->input('size');
+        //$data['size_id'] = $request->input('size');
         if ($request->hasFile('a_img')) {
             $destinationPath = base_path() . '/public/images/products';
             $fileName = $request->file('a_img')->getClientOriginalName();
