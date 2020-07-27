@@ -4,8 +4,9 @@
 Complete documentation for the this project it's not ready yet.
 If you want to test repository you must:
 * Clone the repo
+ * `https://github.com/AjayM17/trino-app.git`
 * Database
-  * `create database with name cms`
+  * `create database with name ecommerce_db`
 * Create .env file and set
   * `DB_DATABASE=ecommerce_db`
   * `DB_USERNAME=root`
