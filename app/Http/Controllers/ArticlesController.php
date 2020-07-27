@@ -72,10 +72,12 @@ class ArticlesController extends Controller
      */
     public function store(CreateProduct $request)
     {
-        echo '<pre>'; print_r($request->all());
-        die;
+        
         $data = $this->proccesData($request);
+        echo '<pre>'; print_r($data);
         $product = Product::create($data);
+        echo '<pre>'; print_r($product);
+        die;
         $product->size()->attach($data['size_id']);
         Session::flash('flash_message', 'Product successfully added!');
         return redirect()->back();
