@@ -57,7 +57,7 @@ class LoginController extends BaseController
     {
         // Validations
     $rules = [
-        'email'=>'required|email',
+        'mobile_number'=>'required',
         'password'=>'required'
       ];
       $validator = Validator::make($request->all(), $rules);
@@ -68,20 +68,20 @@ class LoginController extends BaseController
         ]);
       } else {
         // Fetch User
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('mobile_number',$request->mobile_number)->first();
         if($user) {
           // Verify the password
           if( password_verify($request->password, $user->password) ) {
             // Update Token
             $updated_token = str_random(30);
             $tokenArray = ['api_token' => $updated_token];
-            $login = User::where('email',$request->email)->update($tokenArray);
+            $login = User::where('mobile_number',$request->mobile_number)->update($tokenArray);
             
             if($login) {
               return response()->json([
                 'status'       => "sucess",
                 'name'         => $user->name,
-                'email'        => $user->email,
+                'mobile_number'=> $user->mobile_number,
                 'api_token' => $updated_token,
               ]);
             }

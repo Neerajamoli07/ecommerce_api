@@ -72,6 +72,8 @@ class ArticlesController extends Controller
      */
     public function store(CreateProduct $request)
     {
+        echo '<pre>'; print_r($request);
+        die;
         $data = $this->proccesData($request);
         $product = Product::create($data);
         $product->size()->attach($data['size_id']);

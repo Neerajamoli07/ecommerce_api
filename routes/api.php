@@ -26,3 +26,6 @@ Route::post('login', 'API\LoginController@login');
 Route::middleware('auth:api')->group( function () {
 	Route::resource('products', 'API\ProductController');
 });
+Route::middleware('auth:api')->group( function () {
+	Route::resource('categories', 'API\CategoryController');
+});

@@ -24,6 +24,7 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'mobile_number' => 'required',
         ]);
 
 
