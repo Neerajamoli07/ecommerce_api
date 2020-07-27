@@ -55,39 +55,49 @@ class LoginController extends BaseController
      */
     public function login(Request $request)
     {
-        // $this->validateLogin($request);
-        // if ($this->attemptLogin($request)) {
-        //     return $this->sendResponse("error", json_encode($this->user));
-        // } else {
-        //     return $this->sendResponse("success", 'User login successfully.');
-        // }
-      //   if(User::where('email', $request->get('email'))->exists()){
-      //       $user = User::where('email', $request->get('email'))->first();
-      //       $auth = Hash::check($request->get('password'), $user->password);
-      //       if($user && auth){
-         
-      //          $user->rollApiKey(); //Model Function
-         
-      //          return response(array(
-      //             'currentUser' => $user,
-      //             'message' => 'Authorization Successful!',
-      //          ));
-      //       }
-      //    }
-      //    return response(array(
-      //       'message' => 'Unauthorized, check your credentials.',
-      //    ), 401);
+        // Validations
+    $rules = [
+        'email'=>'required|email',
+        'password'=>'required'
+      ];
+      $validator = Validator::make($request->all(), $rules);
+      if ($validator->fails()) {
+        // Validation failed
+        return response()->json([
+          'message' => $validator->messages(),
+        ]);
+      } else {
+        // Fetch User
+        $user = User::where('email',$request->email)->first();
+        if($user) {
+          // Verify the password
+          if( password_verify($request->password, $user->password) ) {
+            // Update Token
+            $updated_token = str_random(30);
+            $tokenArray = ['api_token' => $updated_token];
+            $login = User::where('email',$request->email)->update($tokenArray);
+            
+            if($login) {
+              return response()->json([
+                'status'       => "sucess",
+                'name'         => $user->name,
+                'email'        => $user->email,
+                'api_token' => $updated_token,
+              ]);
+            }
+          } else {
+            return response()->json([
+              'status'       => "error",
+              'message' => 'Invalid Password',
+            ]);
+          }
+        } else {
+          return response()->json([
+            'status'       => "Invaild",
+            'message' => 'User not found',
+          ]);
+        }
+      }
     }
-
-    /**
- * Roll API Key
- */
-// public function rollApiKey(){
-//     do{
-//        $this->api_token = str_random(30);
-//     }while($this->where('api_token', $this->api_token)->exists());
-//     $this->save();
-//  }
-
     
 }

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
+use App\Models\Product;
 use App\Repositories\CrudRepository;
 use App\Repositories\OrderRepository;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -64,10 +65,12 @@ class BackendController extends Controller
     {
         if (auth()->check() && auth()->user()->hasRole('admin')) {
             $title = 'Admin Dashboard';
+            $totalUsers =  User::count();
+            $totalProducts = Product::count();
         } else {
             $title = 'User Dashboard';
         }
-        return view('backend/dashboard', compact('title'));
+        return view('backend/dashboard', compact('title','totalUsers','totalProducts'));
     }
 
     /**
