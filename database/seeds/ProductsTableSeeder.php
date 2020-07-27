@@ -798,7 +798,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             46 => 
             array (
-                'id' => 57,
+                'id' => 47,
                 'slug' => 'CK-Women-Wrap',
                 'name' => 'CK Women Wrap',
                 'description' => '<p>
