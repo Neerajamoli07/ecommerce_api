@@ -86,9 +86,10 @@ class RegisterController extends Controller
     {
         $validator = $this->validator($request->all());
         if ($validator->passes()) {
+            $input = $request->all();
             $user['link'] = str_random(30);
             $input['api_token'] = $user['link'];
-            $user = $this->create($request->all());
+            $user = $this->create($input);
             
             $this->activation->create(['id_user' => $user->id, 'token' => $user->link]);
             Mail::to($user->email)->send(new Activate($user));
