@@ -561,7 +561,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             32 => 
             array (
-                'id' => 36,
+                'id' => 33,
                 'slug' => 'Moschino-Red-Jacket',
                 'name' => 'Moschino Red Jacket',
                 'description' => '<p>
@@ -578,7 +578,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.&gt;</p>
             ),
             33 => 
             array (
-                'id' => 37,
+                'id' => 34,
                 'slug' => 'CK-Violet-Jacket-Arc',
                 'name' => 'CK Violet Jacket Arc',
                 'description' => '<p>
@@ -595,7 +595,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             34 => 
             array (
-                'id' => 38,
+                'id' => 35,
                 'slug' => 'Fendi-Blue-Jacket ',
                 'name' => 'Fendi Blue Jacket ',
                 'description' => '<p>
@@ -612,7 +612,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             35 => 
             array (
-                'id' => 39,
+                'id' => 36,
                 'slug' => 'Pepe-Jeans-Violet-Blazer',
                 'name' => 'Pepe Jeans Violet Blazer',
                 'description' => '<p>
@@ -629,7 +629,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             36 => 
             array (
-                'id' => 40,
+                'id' => 37,
                 'slug' => 'Pepe-Jeans-Vintage-1969',
                 'name' => 'Pepe Jeans Vintage 1969',
                 'description' => '<p>
@@ -646,7 +646,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             37 => 
             array (
-                'id' => 41,
+                'id' => 38,
                 'slug' => 'Moschino-Blue-Sweater',
                 'name' => 'Moschin Blue Sweater',
                 'description' => '<p>
@@ -663,7 +663,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             38 => 
             array (
-                'id' => 42,
+                'id' => 39,
                 'slug' => 'Fendi-Tuxedo-Blazer',
                 'name' => 'Fendi Tuxedo Blazer',
                 'description' => '<p>
@@ -680,7 +680,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             39 => 
             array (
-                'id' => 43,
+                'id' => 40,
                 'slug' => 'CK-Violet-Blazer',
                 'name' => 'CK Violet Blazer',
                 'description' => '<p>
@@ -697,7 +697,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             40 => 
             array (
-                'id' => 44,
+                'id' => 41,
                 'slug' => 'Dior-Black-Shirt-Stripe',
                 'name' => 'Dior Black Shirt Stripe',
                 'description' => '<p>
@@ -714,7 +714,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             41 => 
             array (
-                'id' => 45,
+                'id' => 42,
                 'slug' => 'Fendi-Red-T-Shirt',
                 'name' => 'Fendi Red T-Shirt',
                 'description' => '<p>
@@ -731,7 +731,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             42 => 
             array (
-                'id' => 46,
+                'id' => 43,
                 'slug' => 'DKNY-Black-Jacket',
                 'name' => 'DKNY Black Jacket',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -747,7 +747,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
             ),
             43 => 
             array (
-                'id' => 47,
+                'id' => 44,
                 'slug' => 'Dior-Blue-Women-Wrap',
                 'name' => 'Dior Blue Women Wrap',
                 'description' => '<p>
@@ -764,7 +764,7 @@ Nice blue stylish wrap from famous brand Dior</p>
             ),
             44 => 
             array (
-                'id' => 48,
+                'id' => 45,
                 'slug' => 'CK-Nice-Women-Blue-Wrap',
                 'name' => 'CK Nice Women Blue Wrap',
                 'description' => '<p>
@@ -781,7 +781,7 @@ K Nice Women Blue Wrap.&nbsp;Pellentesque habitant morbi tristique senectus et n
             ),
             45 => 
             array (
-                'id' => 49,
+                'id' => 46,
                 'slug' => 'CK-Wrap-Women-Blue ',
                 'name' => 'CK Wrap Women Blue ',
                 'description' => '<p>
@@ -798,7 +798,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             46 => 
             array (
-                'id' => 50,
+                'id' => 57,
                 'slug' => 'CK-Women-Wrap',
                 'name' => 'CK Women Wrap',
                 'description' => '<p>
@@ -815,7 +815,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             47 => 
             array (
-                'id' => 51,
+                'id' => 48,
                 'slug' => 'CL-Light-Blue-Wrap',
                 'name' => 'CL Light Blue Wrap',
                 'description' => '<p>
@@ -832,7 +832,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             48 => 
             array (
-                'id' => 52,
+                'id' => 49,
                 'slug' => 'CK-Wrap-Blue-Jeans',
                 'name' => 'CK Wrap Blue Jeans',
                 'description' => '<p>
@@ -849,7 +849,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             49 => 
             array (
-                'id' => 53,
+                'id' => 50,
                 'slug' => 'CK-Blue-Wrap-Shirt',
                 'name' => 'CK Blue Wrap Shirt',
                 'description' => '<p>
@@ -866,7 +866,7 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
             ),
             50 => 
             array (
-                'id' => 54,
+                'id' => 51,
                 'slug' => 'Dior-White-Mini',
                 'name' => 'Dior White Mini',
             'description' => '<p style="box-sizing: border-box; margin: 0px 0px 20px; color: rgb(102, 102, 102); font-family: Roboto, sans-serif; line-height: 18px;">
@@ -883,7 +883,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             51 => 
             array (
-                'id' => 55,
+                'id' => 52,
                 'slug' => 'DKNY-Black-Mini',
                 'name' => 'DKNY Black Mini',
                 'description' => '<p>
@@ -900,7 +900,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             52 => 
             array (
-                'id' => 56,
+                'id' => 53,
                 'slug' => 'Gucci-White-Mini',
                 'name' => 'Gucci White Mini',
                 'description' => '<p>
@@ -917,7 +917,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             53 => 
             array (
-                'id' => 57,
+                'id' => 54,
                 'slug' => 'Fendi-Brown-Mini',
                 'name' => 'Fendi Brown Mini',
                 'description' => '<p>
@@ -934,7 +934,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             54 => 
             array (
-                'id' => 58,
+                'id' => 55,
                 'slug' => 'Pepe-Jeans-Black-Mini',
                 'name' => 'Pepe Jeans Black Mini',
                 'description' => '<p>
@@ -951,7 +951,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             55 => 
             array (
-                'id' => 59,
+                'id' => 56,
                 'slug' => 'Moschino-Brown-Mini',
                 'name' => 'Moschino Brown Mini',
                 'description' => '<p>
@@ -968,7 +968,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             56 => 
             array (
-                'id' => 62,
+                'id' => 57,
                 'slug' => 'CK-White-Pleated-Top',
                 'name' => 'CK White Pleated Top',
                 'description' => '<p>
@@ -985,7 +985,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             57 => 
             array (
-                'id' => 63,
+                'id' => 58,
                 'slug' => 'Dior-Brown-Tops',
                 'name' => 'Dior Brown Tops',
                 'description' => '<p>
@@ -1002,7 +1002,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             58 => 
             array (
-                'id' => 64,
+                'id' => 59,
                 'slug' => 'Gucci-Black-Top',
                 'name' => 'Gucci Black Top',
                 'description' => '<p>
@@ -1019,7 +1019,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             59 => 
             array (
-                'id' => 65,
+                'id' => 60,
                 'slug' => 'Moschino-Red-Top',
                 'name' => 'Moschino Red Top',
                 'description' => '<p>
@@ -1036,7 +1036,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             60 => 
             array (
-                'id' => 66,
+                'id' => 61,
                 'slug' => 'DKNY-Black-Crop-Top',
                 'name' => 'DKNY Black Crop Top',
                 'description' => '<p>
@@ -1053,7 +1053,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             61 => 
             array (
-                'id' => 67,
+                'id' => 62,
                 'slug' => 'Pepe-Jeans-Mini',
                 'name' => 'Pepe Jeans Mini',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -1068,7 +1068,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             62 => 
             array (
-                'id' => 68,
+                'id' => 63,
                 'slug' => 'Fendi-Red-Top',
                 'name' => 'Fendi Red Top',
                 'description' => 'Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat.
@@ -1084,7 +1084,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             63 => 
             array (
-                'id' => 69,
+                'id' => 64,
                 'slug' => 'CK-Graphic-Top',
                 'name' => 'CK Graphic Top',
                 'description' => '<p>
@@ -1100,7 +1100,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             64 => 
             array (
-                'id' => 70,
+                'id' => 65,
                 'slug' => 'Pepe-Green-Shirt',
                 'name' => 'Pepe Green Shirt',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt rhoncus malesuada. Cras consequat pharetra accumsan. Vivamus condimentum nibh sapien, eget lobortis libero feugiat ultricies. Curabitur ac libero tempus, congue magna sit amet, hendrerit tellus. Curabitur laoreet mattis maximus. In egestas ex in neque molestie, at lobortis odio luctus. Cras porta arcu vel mi commodo sodales. Mauris porttitor ante orci, id gravida lorem rhoncus nec. Praesent dapibus sapien a lacus egestas, vitae dapibus nibh dictum. Integer vel mauris diam. Mauris eleifend pulvinar augue. Mauris sollicitudin ligula id mattis condimentum. Duis ac tristique est. Integer facilisis, diam nec tempor congue, leo massa pulvinar purus, interdum laoreet nibh sem sed felis. Fusce tristique cursus urna a bibendum.',
@@ -1115,7 +1115,7 @@ Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, tur
             ),
             65 => 
             array (
-                'id' => 79,
+                'id' => 66,
                 'slug' => 'Gucci-Black-Top',
                 'name' => 'Gucci Black Top',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat faucibus sollicitudin. Sed nec fringilla nibh. Sed maximus finibus purus, eu volutpat arcu aliquet sit amet. Sed cursus ipsum sit amet elit sagittis, ac faucibus libero ultricies. In tempor velit vel dictum rhoncus. Morbi in ante commodo, condimentum felis in, lobortis ante. Praesent vitae magna ultricies, rutrum lorem et, iaculis nunc. Curabitur finibus neque neque, at consectetur tellus tristique ac. Praesent eu sollicitudin magna, in placerat nisi.
@@ -1131,7 +1131,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur consequat fau
             ),
             66 => 
             array (
-                'id' => 80,
+                'id' => 67,
                 'slug' => 'DKNY-Green-Shirt',
                 'name' => 'DKNY Green Shirt',
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum nibh nulla, eget gravida libero venenatis ac. Praesent sit amet metus cursus, ultricies ligula ut, sollicitudin libero. Phasellus sagittis posuere nisl sit amet eleifend. Ut nec metus feugiat, mollis ante vel, auctor orci. Phasellus sit amet vestibulum tortor. Praesent dignissim magna ut arcu ornare, a fringilla ipsum ultrices. Integer eros dolor, volutpat eget orci viverra, suscipit rhoncus arcu. Phasellus bibendum non turpis nec cursus. Pellentesque fringilla venenatis justo, ac pretium enim malesuada sit amet.
