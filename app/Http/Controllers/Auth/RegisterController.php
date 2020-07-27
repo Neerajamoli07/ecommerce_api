@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'api_token' => $data['api_token']
         ]);
     }
 
@@ -89,8 +90,6 @@ class RegisterController extends Controller
             $input = $request->all();
             $user['link'] = str_random(30);
             $input['api_token'] = $user['link'];
-            echo "reg";
-            echo '<pre>' ;print_r($input);
             $user = $this->create($input);
             
             $this->activation->create(['id_user' => $user->id, 'token' => $user->link]);
