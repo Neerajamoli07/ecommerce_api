@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'api_token' => $data['api_token']
+            'api_token' => $data['api_token'],
         ]);
     }
 
@@ -91,8 +91,9 @@ class RegisterController extends Controller
             $user['link'] = str_random(30);
             $input['api_token'] = $user['link'];
             $user = $this->create($input);
-            
-            $this->activation->create(['id_user' => $user->id, 'token' => $user->link]);
+           
+
+            $this->activation->create(['id_user' => $user->id, 'token' => $user->api_token ]);
             Mail::to($user->email)->send(new Activate($user));
             return redirect()->to('login')
                 ->with('success', "We sent activation code. Please check your mail.");

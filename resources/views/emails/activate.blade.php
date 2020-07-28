@@ -7,7 +7,7 @@ Hello {{$user->name}}
 Activation Link
 @endcomponent--}}
 Dear, {{ $user->name }}
-Please activate your account at : {{ url('user/activation', $user->link)}}
+Please activate your account at : {{ url('user/activation', $user->api_token)}}
 
 Thanks from,<br>
 {{ config('app.name') }}

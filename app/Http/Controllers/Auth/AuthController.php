@@ -114,7 +114,7 @@ class AuthController extends Controller
             $input['api_token'] = $user['link'];
             $user = $this->create($input)->toArray();
             
-            Activation::create(['id_user' => $user['id'], 'token' => $user['link']]);
+            Activation::create(['id_user' => $user['id'], 'token' => $user->api_token]);
             Mail::send('emails.activation', $user, function ($message) use ($user) {
                 $message->to($user['email']);
                 $message->subject('Site - Activation Code');
