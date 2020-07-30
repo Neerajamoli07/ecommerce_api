@@ -5,20 +5,6 @@ namespace App\Repositories;
 
 class ModelFactory
 {
-
-    /**
-     *
-     * Not pure Factory class just simple Payment Factory,
-     * for most basic Eloquent queries.
-     *
-     * Can be easy extended and modified for all repositories and controllers.
-     * Can be modified for single repository.
-     *
-     * @package ecommerce-cms
-     * @author Tihomir Blazhev <raylight75@gmail.com>
-     * @link https://raylight75@bitbucket.org/raylight75/ecommerce-cms.git
-     * /
-
      /**
      * @param $model
      * @return model instance.
