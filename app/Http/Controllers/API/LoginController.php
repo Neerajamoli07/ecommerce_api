@@ -83,6 +83,8 @@ class LoginController extends BaseController
                 'name'         => $user->name,
                 'mobile_number'=> $user->mobile_number,
                 'api_token' => $updated_token,
+                'email'        => $user->email,
+                'address'      => $user->address,
               ]);
             }
           } else {
@@ -99,5 +101,42 @@ class LoginController extends BaseController
         }
       }
     }
+
+  public function updateProfile(Request $request){
+      $rules = [
+        'address'=>'required',
+        'user_id'=>'required'
+      ];
+      $validator = Validator::make($request->all(), $rules);
+      if ($validator->fails()) {
+        // Validation failed
+        return response()->json([
+          'message' => $validator->messages(),
+        ]);
+      } else {
+        // Fetch User
+        $user = User::where('id',$request->get('user_id'))->first();
+      
+        if($user) {
+          $user ->name  = $request->get('name');
+          $user ->email = $request->get('email');
+          $user ->mobile_number = $request->get('mobile_number');
+          $user ->address = $request->get('address');
+
+          if($user->save()) {
+            return response()->json([
+              'status'       => "sucess",
+              'address'         => $user->address,
+            ]);
+          }
+        } else {
+          return response()->json([
+            'status'       => "Invaild",
+            'message' => 'User not found',
+          ]);
+        }
+      }
+
+  }
     
 }

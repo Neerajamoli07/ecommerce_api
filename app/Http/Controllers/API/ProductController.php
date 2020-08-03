@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 
@@ -17,6 +18,8 @@ class ProductController extends BaseController
      */
     public function index()
     {
+        //$sql = "SELECT id,slug,name,description,brand_id,cat_id,parent_id,quantity,price, CONCAT(a_img, ', ', b_img, ', ', c_img) AS product_image FROM products";
+       // $results = DB::select($sql);
         $products = Product::all();
 
 
