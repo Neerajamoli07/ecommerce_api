@@ -80,6 +80,7 @@ class LoginController extends BaseController
             if($login) {
               return response()->json([
                 'status'       => "sucess",
+                'user_id'      => $user->id,
                 'name'         => $user->name,
                 'mobile_number'=> $user->mobile_number,
                 'api_token' => $updated_token,

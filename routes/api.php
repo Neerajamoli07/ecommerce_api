@@ -30,3 +30,6 @@ Route::middleware('auth:api')->group( function () {
 Route::middleware('auth:api')->group( function () {
 	Route::resource('categories', 'API\CategoryController');
 });
+Route::middleware('auth:api')->group( function () {
+	Route::resource('orders', 'API\OrdersController');
+});
