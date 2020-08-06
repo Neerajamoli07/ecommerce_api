@@ -36,4 +36,8 @@ class User extends Authenticatable implements  HasRoleAndPermissionContract
     {
         return $this->belongsToMany('App\Models\Role')->withTimestamps();
     }
+    public function orderItem()
+    {
+        return $this->belongsTo('App\Models\OrderItem');
+    }
 }

@@ -79,4 +79,8 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Color');
     }
+    public function orderItem()
+    {
+        return $this->belongsTo('App\Models\OrderItem');
+    }
 }

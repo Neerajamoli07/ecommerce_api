@@ -10,7 +10,8 @@
         <tr class="bg-info">
             <th>ID</th>
             <th>Name</th>
-            <th>Email
+            <th>Email</th>
+            <th>Mobile</th>
             <th>Roles</th>
             <th>Active</th>
             <th colspan="3">Actions</th>
@@ -22,6 +23,7 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email}}</td>
+                <td>{{ $user->mobile_number}}</td>
                 <td>{{implode(",", $user->role->pluck("slug")->all())}}</td>
                 <td>{{ $user->is_activated == 1 ? 'Yes' : 'No' }}</td>
                 <td><a href="{{route('users.edit',$user->id)}}" class="btn btn-warning">Update</a></td>

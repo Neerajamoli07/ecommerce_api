@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class OrderItem extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'orders';
+    protected $table = 'order_items';
 
     /**
      * The attributes that are mass assignable.
@@ -21,14 +21,12 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'order_date',
-        'status',
         'product_id',
-        'size',
-        'img',
-        'color',
-        'quantity',
-        'amount',
+        'order_id',
+        'product_name',
+        'product_image',
+        'product_price',
+        'product_quantity'
 
     ];
 
@@ -40,16 +38,18 @@ class Order extends Model
 
     public $timestamps = false;
 
-    public function products()
+    public function orders()
     {
-        return $this->hasOne('App\Models\Product', 'id', 'product_id');
+        return $this->hasMany('App\Models\Order');
     }
     public function users()
     {
-        return $this->hasOne('App\User', 'id', 'user_id');
+        return $this->hasOne('App\User');
     }
-    public function orderItem()
+
+    public function products()
     {
-        return $this->belongsTo('App\Models\OrderItem');
+        return $this->hasMany('App\Models\Product');
     }
+
 }

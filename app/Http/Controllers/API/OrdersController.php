@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -38,21 +39,45 @@ class OrdersController extends BaseController
         $input = $request->all();
         $validator = Validator::make($input, [
             'user_id' => 'required',
-            'product_id' => 'required'
+            'product_id' => 'required',
+            
         ]);
 
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
+         $order = Order::create([
+            'user_id' => $input['user_id'],
+            'order_date' => date('Y-m-d H:i:s'),
+            'status' => 2,
+            'product_id' => $input['cart_items'][0]['product_id'],
+            'size' => 'XL',
+            'img' => $input['cart_items'][0]['product_image'],
+            'color' => 'red',
+            'quantity' => $input['cart_items'][0]['product_quantity'],
+            'amount' => $input['total_amount']
+         ]);
 
-        // $order = Order::create([
-        //     'user_id' => $input['user_id'],
-        //     'product_id' => $input[]['product_id'],
-        //     'user_id' => $input['user_id'],
-        //     'user_id' => $input['user_id'],
-        // ]);
-        // return $this->sendResponse($order->toArray(), 'Order create successfully.');
+         if($order){
+          foreach ($input['cart_items'] as $value){
+             OrderItem::create([
+             'user_id' => $input['user_id'],
+             'order_id' => $order,
+             'product_id' => $value['product_id'],
+             'product_name' => $value['product_name'],
+             'product_image' => $value['product_image'],
+             'product_price' => $value['product_price'],
+             'product_quantity' => $value['product_quantity'],
+             'created_at' => date('Y-m-d H:i:s'),
+             'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+          }
+         }else{
+            return $this->sendResponse($order->toArray(), 'Something went wrong.');
+         }
+
+        return $this->sendResponse($order->toArray(), 'Order create successfully.');
     
     }
 
