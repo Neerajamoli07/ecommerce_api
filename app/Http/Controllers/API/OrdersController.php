@@ -90,7 +90,7 @@ class OrdersController extends BaseController
      */
     public function show($id)
     {
-        $orders = OrderItem::where('user_id',$id)->get();
+        $orders = OrderItem::where('user_id',$id)->get()->groupBy('order_id');
         
         if (is_null($orders)) {
            return $this->sendError('Order not found.');
