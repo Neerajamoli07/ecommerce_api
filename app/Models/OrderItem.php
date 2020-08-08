@@ -36,15 +36,15 @@ class OrderItem extends Model
      * @var bool
      */
 
-    public $timestamps = false;
+    public $timestamps = true;
 
-    public function orders()
+    public function order()
     {
-        return $this->hasMany('App\Models\Order');
+        return $this->belongsTo('App\Models\Order');
     }
     public function users()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function products()

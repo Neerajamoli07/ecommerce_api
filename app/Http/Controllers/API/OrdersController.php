@@ -65,14 +65,12 @@ class OrdersController extends BaseController
           foreach ($input->cart_items as $value){
              OrderItem::create([
              'user_id' => $input -> user_id,
-             'order_id' => $order,
+             'order_id' => $order -> id,
              'product_id' => $value -> product_id,
              'product_name' => $value -> product_name,
              'product_image' => $value -> product_image,
              'product_price' => $value -> product_price,
-             'product_quantity' => $value -> product_quantity,
-             'created_at' => date('Y-m-d H:i:s'),
-             'updated_at' => date('Y-m-d H:i:s'),
+             'product_quantity' => $value -> product_quantity
             ]);
           }
          }else{
@@ -92,15 +90,13 @@ class OrdersController extends BaseController
      */
     public function show($id)
     {
-        // $product = Product::find($id);
+        $orders = OrderItem::where('order_id',$id)->get();
+        
+        if (is_null($orders)) {
+           return $this->sendError('Order not found.');
+        }
 
-
-        // if (is_null($product)) {
-        //     return $this->sendError('Product not found.');
-        // }
-
-
-        // return $this->sendResponse($product->toArray(), 'Product retrieved successfully.');
+       return $this->sendResponse($orders->toArray(), 'Order retrieved successfully.');
     
     }
 

@@ -48,8 +48,8 @@ class Order extends Model
     {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
-    public function orderItem()
+    public function orderItems()
     {
-        return $this->belongsTo('App\Models\OrderItem');
+        return $this->hasMany('App\Models\OrderItem');
     }
 }
