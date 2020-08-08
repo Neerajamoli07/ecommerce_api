@@ -36,39 +36,41 @@ class OrdersController extends BaseController
     {
         // user_id,order_date, status,product_id,size,
         //img, quantity,amount
-        $input = $request->all();
-        $validator = Validator::make($input, [
-            'user_id' => 'required',
-            'product_id' => 'required',
-            
-        ]);
+        $input_data = $request->getContent();
+        $input = json_decode($input_data);
 
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        $validation_input = [$input->user_id,$input->cart_items[0]->product_id];
+        
+        if(!($validation_input[0] && $validation_input[1]) ){
+            $validator = [
+              "sucess" => false,
+              "message" => "user_id and product_id required",
+            ];
+            return $this->sendError('Validation Error.', $validator);       
         }
+        
          $order = Order::create([
-            'user_id' => $input['user_id'],
+            'user_id' => $input->user_id,
             'order_date' => date('Y-m-d H:i:s'),
             'status' => 2,
-            'product_id' => $input['cart_items'][0]['product_id'],
+            'product_id' => $input->cart_items[0]->product_id,
             'size' => 'XL',
-            'img' => $input['cart_items'][0]['product_image'],
+            'img' => $input->cart_items[0]->product_image,
             'color' => 'red',
-            'quantity' => $input['cart_items'][0]['product_quantity'],
-            'amount' => $input['total_amount']
+            'quantity' => $input->cart_items[0]->product_quantity,
+            'amount' => $input->total_amount
          ]);
 
          if($order){
-          foreach ($input['cart_items'] as $value){
+          foreach ($input->cart_items as $value){
              OrderItem::create([
-             'user_id' => $input['user_id'],
+             'user_id' => $input -> user_id,
              'order_id' => $order,
-             'product_id' => $value['product_id'],
-             'product_name' => $value['product_name'],
-             'product_image' => $value['product_image'],
-             'product_price' => $value['product_price'],
-             'product_quantity' => $value['product_quantity'],
+             'product_id' => $value -> product_id,
+             'product_name' => $value -> product_name,
+             'product_image' => $value -> product_image,
+             'product_price' => $value -> product_price,
+             'product_quantity' => $value -> product_quantity,
              'created_at' => date('Y-m-d H:i:s'),
              'updated_at' => date('Y-m-d H:i:s'),
             ]);
