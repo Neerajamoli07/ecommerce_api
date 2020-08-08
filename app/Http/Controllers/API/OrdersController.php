@@ -90,7 +90,7 @@ class OrdersController extends BaseController
      */
     public function show($id)
     {
-        $orders = OrderItem::where('order_id',$id)->get();
+        $orders = OrderItem::where('user_id',$id)->get();
         
         if (is_null($orders)) {
            return $this->sendError('Order not found.');
