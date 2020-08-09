@@ -91,12 +91,21 @@ class OrdersController extends BaseController
     public function show($id)
     {
         $orders = OrderItem::where('user_id',$id)->get()->groupBy('order_id');
-        
+       
         if (is_null($orders)) {
            return $this->sendError('Order not found.');
         }
+        $orders_data = $orders->toArray();
+        $orders_format = [];
+         foreach($orders_data as $index=>$record){
+            $order = [ 
+                "order_id" => $record[0]['order_id'],
+                "cart_items" => $record
+            ];
+            $orders_format[$index] = $order;
+        }
 
-       return $this->sendResponse($orders->toArray(), 'Order retrieved successfully.');
+       return $this->sendResponse($orders_format, 'Order retrieved successfully.');
     
     }
 
