@@ -96,32 +96,17 @@ class OrdersController extends BaseController
            return $this->sendError('Order not found.');
         }
         $orders_data = $orders->toArray();
-        //$arr = [];
+        
         $orders_format = array();
          foreach($orders_data as $index=>$record){
-            $cart_item = [];
             $order = [];
+            $order_placed_data = Order::find($record[0]['order_id']);
+            $order['total_amount'] = $order_placed_data->amount;
+            $order['order_date'] = $order_placed_data->order_date;
             $order["order_id"] = $record[0]['order_id'];
-            $order["cart_items"] = $record;
-            // foreach($record as $key=>$value){
-            //   $item = [
-            //         "id" => $value['id'],
-            //         "user_id" => $value['user_id'],
-            //         "product_id" => $value['product_id'],
-            //         "order_id" => $value['order_id'],
-            //         "product_name" => $value['product_name'],
-            //         "product_image" => $value['product_image'],
-            //         "product_price" => $value['product_price'],
-            //         "product_quantity" => $value['product_quantity'],
-            //         "created_at" => $value['created_at'],
-            //         "updated_at" => $value['updated_at'],
-            //   ];
-            //   $cart_item[$key] = $item;
-            // }
-            // $order["cart_items"]= $cart_item;
+            $order["cart_items"] = $record;         
             $orders_format[] = $order;
         }
-        //return response()->json($orders_format);
 
        return $this->sendResponse($orders_format, 'Order retrieved successfully.');
     
