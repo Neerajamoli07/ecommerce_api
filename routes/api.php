@@ -24,6 +24,8 @@ Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\LoginController@login');
 Route::post('updateProfile', 'API\LoginController@updateProfile');
 
+Route::get('searchProduct/{data}', 'API\ProductController@searchProduct');
+
 Route::middleware('auth:api')->group( function () {
 	Route::resource('products', 'API\ProductController');
 });

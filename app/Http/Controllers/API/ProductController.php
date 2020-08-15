@@ -11,33 +11,18 @@ use Validator;
 
 class ProductController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         //$sql = "SELECT id,slug,name,description,brand_id,cat_id,parent_id,quantity,price, CONCAT(a_img, ', ', b_img, ', ', c_img) AS product_image FROM products";
        // $results = DB::select($sql);
         $products = Product::all();
-
-
         return $this->sendResponse($products->toArray(), 'Products retrieved successfully.');
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // $input = $request->all();
-
-
         // $validator = Validator::make($input, [
         //     'name' => 'required',
         //     'detail' => 'required'
@@ -50,19 +35,10 @@ class ProductController extends BaseController
 
 
         // $product = Product::create($input);
-
-
         // return $this->sendResponse($product->toArray(), 'Product created successfully.');
     
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         // $product = Product::find($id);
@@ -76,15 +52,6 @@ class ProductController extends BaseController
         // return $this->sendResponse($product->toArray(), 'Product retrieved successfully.');
     
     }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         // $input = $request->all();
@@ -110,19 +77,16 @@ class ProductController extends BaseController
    
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         // $product->delete();
-
-
         // return $this->sendResponse($product->toArray(), 'Product deleted successfully.');
-    
+    }
+
+    // serach product
+    public function searchProduct($data){
+      $products = Product::where('name', 'like', '%' . $data . '%')
+            ->orderBy('name')->get();
+     return $this->sendResponse($products->toArray(), 'Product retrieve successfully.');
     }
 }
