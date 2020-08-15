@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Category;
+use App\Models\Product;
 use Validator;
 
 
@@ -44,7 +45,9 @@ class CategoryController extends BaseController
      */
     public function show($id)
     {
-    
+      // show product on the basis of category id
+      $products = Product::where(['cat_id' => $id])->get();
+      return $this->sendResponse($products->toArray(), 'Products retrieved successfully.');
     }
 
 
