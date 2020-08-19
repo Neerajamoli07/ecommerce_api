@@ -151,6 +151,26 @@ class BackendController extends Controller
         return view('backend/content', compact('filter', 'grid', 'title'));
     }
 
+    // show weekly order
+
+    public function weeklyOrders()
+    {
+        $filter = $this->crud->weeklyOrdersFilter();
+        $grid = $this->crud->weeklyOrdersGrid();
+        $title = $this->crud->getWeeklyOrderTable();
+        return view('backend/content', compact('filter', 'grid', 'title'));
+    }
+
+    // show monthly order
+
+    public function monthlyOrders()
+    {
+        $filter = $this->crud->monthlyOrdersFilter();
+        $grid = $this->crud->monthlyOrdersGrid();
+        $title = $this->crud->getMonthlyOrderTable();
+        return view('backend/content', compact('filter', 'grid', 'title'));
+    }
+
     /**
      * Edit Orders
      * @return string|View

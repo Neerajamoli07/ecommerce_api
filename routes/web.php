@@ -102,6 +102,8 @@ Route::middleware('admin:admin')
         Route::get('products', 'BackendController@products');
         Route::any('products/edit', 'BackendController@productsEdit');
         Route::get('orders', 'BackendController@orders');
+        Route::get('weeklyOrders', 'BackendController@weeklyOrders');
+        Route::get('monthlyOrders', 'BackendController@monthlyOrders');
         Route::any('orders/edit', 'BackendController@ordersEdit');
         Route::get('/admin', 'BackendController@dashboard');
         Route::get('roles', 'UsersController@role');

@@ -34,14 +34,27 @@
     @slot('icon')icon fa fa-list-alt @endslot
     @slot('name')Subcategories @endslot
     @endcomponent
-    @component('backend.dropdown')
-    {!! Helper::setActive('products') !!}
-    @slot('link'){{ url('backend/products') }}@endslot
-    @slot('m_icon')icon fa fa-table @endslot
-    @slot('m_name')Manage Catalog @endslot
-    @slot('s_icon')icon fa fa-pencil-square-o @endslot
-    @slot('s_name')Edit Products @endslot
-    @endcomponent
+    
+    <li class="  panel panel-default dropdown">
+    <a data-toggle="collapse" href="#dropdown-table">
+        <span class="icon fa fa-table"></span><span class="title">Reports</span>
+    </a>
+    <!-- Dropdown-->
+    <div id="dropdown-table" class="panel-collapse collapse">
+        <div class="panel-body">
+            <ul class="nav navbar-nav">
+                <li><a href="/backend/weeklyOrders">
+                        <span class="icon fa fa-pencil-square-o"></span>Weekly Reports</a>
+                </li>
+                <li><a href="/backend/monthlyOrders">
+                        <span class="icon fa fa-pencil-square-o"></span>Monthly Reports</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Dropdown-->
+</li>
+    
 @endadmin
 @user
     @component('backend.link')

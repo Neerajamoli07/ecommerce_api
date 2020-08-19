@@ -301,6 +301,7 @@ class CrudRepository
         return $filter;
     }
 
+
     /**
      * Crud for Products table.
      * @return mixed
@@ -331,6 +332,88 @@ class CrudRepository
      * @return mixed
      */
     public function getOrderTable()
+    {
+        return $table = with(new Order())->getTable();
+    }
+
+    public function weeklyOrdersFilter()
+    {
+        $date = \Carbon\Carbon::today()->subDays(7)->format('Y-m-d')." 00:00:00";
+        $filter = \DataFilter::source($this->order->with('users', 'products')->whereRaw('order_date >='."'".$date. "'" ));
+        $filter->add('id', 'ID', 'text')->clause('where')->operator('=');
+        $filter->add('users.name', 'Customer', 'text');
+        $filter->add('products.name', 'Product', 'text');
+        $filter->add('size', 'Size', 'text');
+        $filter->add('color', 'Color', 'text');
+        $filter->submit('search');
+        $filter->reset('reset');
+        $filter->build();
+        return $filter;
+    }
+
+    public function weeklyOrdersGrid()
+    {
+        $grid = DataGrid::source($this->weeklyOrdersFilter());
+        $grid->label('User Orders');
+        $grid->attributes(array("class" => "table table-striped"));
+        $grid->add('id', 'ID', true)->style("width:100px");
+        $grid->add('users.name', 'Customer', 'text');
+        $grid->add('order_date', 'Date');
+        $grid->add('<a href="/backend/products/edit?show={{ $products->product_id }}">{{ $products->name }}</a>', 'Product');
+        $grid->add('size', 'Size');
+        $grid->add('<img src="/images/products/{{ $img }}" height="25" width="25">', 'Image');
+        $grid->add('color', 'Color');
+        $grid->add('quantity', 'Qty');
+        $grid->add('amount', 'Amount');
+        $grid->edit('/backend/orders/edit');
+        $grid->link('/backend/orders/edit', "New Order", "TR");
+        $grid->orderBy('id', 'asc');
+        $grid->paginate(10);
+        return $grid;
+    }
+
+    public function getWeeklyOrderTable()
+    {
+        return $table = with(new Order())->getTable();
+    }
+
+    public function monthlyOrdersFilter()
+    {
+        $date = \Carbon\Carbon::today()->subDays(30)->format('Y-m-d')." 00:00:00";
+        $filter = \DataFilter::source($this->order->with('users', 'products')->whereRaw('order_date >='."'".$date. "'" ));
+        $filter->add('id', 'ID', 'text')->clause('where')->operator('=');
+        $filter->add('users.name', 'Customer', 'text');
+        $filter->add('products.name', 'Product', 'text');
+        $filter->add('size', 'Size', 'text');
+        $filter->add('color', 'Color', 'text');
+        $filter->submit('search');
+        $filter->reset('reset');
+        $filter->build();
+        return $filter;
+    }
+
+    public function monthlyOrdersGrid()
+    {
+        $grid = DataGrid::source($this->monthlyOrdersFilter());
+        $grid->label('User Orders');
+        $grid->attributes(array("class" => "table table-striped"));
+        $grid->add('id', 'ID', true)->style("width:100px");
+        $grid->add('users.name', 'Customer', 'text');
+        $grid->add('order_date', 'Date');
+        $grid->add('<a href="/backend/products/edit?show={{ $products->product_id }}">{{ $products->name }}</a>', 'Product');
+        $grid->add('size', 'Size');
+        $grid->add('<img src="/images/products/{{ $img }}" height="25" width="25">', 'Image');
+        $grid->add('color', 'Color');
+        $grid->add('quantity', 'Qty');
+        $grid->add('amount', 'Amount');
+        $grid->edit('/backend/orders/edit');
+        $grid->link('/backend/orders/edit', "New Order", "TR");
+        $grid->orderBy('id', 'asc');
+        $grid->paginate(10);
+        return $grid;
+    }
+
+    public function getMonthlyOrderTable()
     {
         return $table = with(new Order())->getTable();
     }
