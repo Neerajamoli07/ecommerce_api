@@ -309,7 +309,7 @@ class CrudRepository
     public function ordersGrid()
     {
         $grid = DataGrid::source($this->ordersFilter());
-        $grid->label('User Orders');
+        $grid->label('Total Orders');
         $grid->attributes(array("class" => "table table-striped"));
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('users.name', 'Customer', 'text');
@@ -321,7 +321,7 @@ class CrudRepository
         $grid->add('quantity', 'Qty');
         $grid->add('amount', 'Amount');
         $grid->edit('/backend/orders/edit');
-        $grid->link('/backend/orders/edit', "New Order", "TR");
+        $grid->link('/backend/orders/edit', "TR");
         $grid->orderBy('id', 'asc');
         $grid->paginate(10);
         return $grid;
@@ -354,7 +354,7 @@ class CrudRepository
     public function weeklyOrdersGrid()
     {
         $grid = DataGrid::source($this->weeklyOrdersFilter());
-        $grid->label('User Orders');
+        $grid->label('Total Orders');
         $grid->attributes(array("class" => "table table-striped"));
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('users.name', 'Customer', 'text');
@@ -366,7 +366,7 @@ class CrudRepository
         $grid->add('quantity', 'Qty');
         $grid->add('amount', 'Amount');
         $grid->edit('/backend/orders/edit');
-        $grid->link('/backend/orders/edit', "New Order", "TR");
+        $grid->link('/backend/orders/edit', "TR");
         $grid->orderBy('id', 'asc');
         $grid->paginate(10);
         return $grid;
@@ -393,9 +393,9 @@ class CrudRepository
     }
 
     public function monthlyOrdersGrid()
-    {
+    {   
         $grid = DataGrid::source($this->monthlyOrdersFilter());
-        $grid->label('User Orders');
+        $grid->label('Total Orders');
         $grid->attributes(array("class" => "table table-striped"));
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('users.name', 'Customer', 'text');
@@ -407,13 +407,54 @@ class CrudRepository
         $grid->add('quantity', 'Qty');
         $grid->add('amount', 'Amount');
         $grid->edit('/backend/orders/edit');
-        $grid->link('/backend/orders/edit', "New Order", "TR");
+        $grid->link('/backend/orders/edit', "TR");
         $grid->orderBy('id', 'asc');
         $grid->paginate(10);
         return $grid;
     }
 
     public function getMonthlyOrderTable()
+    {
+        return $table = with(new Order())->getTable();
+    }
+
+    public function dailyOrdersFilter()
+    {
+        $date = \Carbon\Carbon::today()->format('Y-m-d')." 00:00:00";
+        $filter = \DataFilter::source($this->order->with('users', 'products')->whereRaw('order_date >='."'".$date. "'" ));
+        $filter->add('id', 'ID', 'text')->clause('where')->operator('=');
+        $filter->add('users.name', 'Customer', 'text');
+        $filter->add('products.name', 'Product', 'text');
+        $filter->add('size', 'Size', 'text');
+        $filter->add('color', 'Color', 'text');
+        $filter->submit('search');
+        $filter->reset('reset');
+        $filter->build();
+        return $filter;
+    }
+
+    public function dailyOrdersGrid()
+    {
+        $grid = DataGrid::source($this->dailyOrdersFilter());
+        $grid->label('Total Orders');
+        $grid->attributes(array("class" => "table table-striped"));
+        $grid->add('id', 'ID', true)->style("width:100px");
+        $grid->add('users.name', 'Customer', 'text');
+        $grid->add('order_date', 'Date');
+        $grid->add('<a href="/backend/products/edit?show={{ $products->product_id }}">{{ $products->name }}</a>', 'Product');
+        $grid->add('size', 'Size');
+        $grid->add('<img src="/images/products/{{ $img }}" height="25" width="25">', 'Image');
+        $grid->add('color', 'Color');
+        $grid->add('quantity', 'Qty');
+        $grid->add('amount', 'Amount');
+        $grid->edit('/backend/orders/edit');
+        $grid->link('/backend/orders/edit', "TR");
+        $grid->orderBy('id', 'asc');
+        $grid->paginate(10);
+        return $grid;
+    }
+
+    public function getDailyOrderTable()
     {
         return $table = with(new Order())->getTable();
     }

@@ -43,6 +43,9 @@
     <div id="dropdown-table" class="panel-collapse collapse">
         <div class="panel-body">
             <ul class="nav navbar-nav">
+                <li><a href="/backend/dailyOrders">
+                        <span class="icon fa fa-pencil-square-o"></span>Daily Reports</a>
+                </li>
                 <li><a href="/backend/weeklyOrders">
                         <span class="icon fa fa-pencil-square-o"></span>Weekly Reports</a>
                 </li>

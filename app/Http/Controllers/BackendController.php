@@ -171,6 +171,16 @@ class BackendController extends Controller
         return view('backend/content', compact('filter', 'grid', 'title'));
     }
 
+    // show daily order
+
+    public function dailyOrders()
+    {
+        $filter = $this->crud->dailyOrdersFilter();
+        $grid = $this->crud->dailyOrdersGrid();
+        $title = $this->crud->getDailyOrderTable();
+        return view('backend/content', compact('filter', 'grid', 'title'));
+    }
+
     /**
      * Edit Orders
      * @return string|View
