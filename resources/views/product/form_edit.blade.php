@@ -45,7 +45,7 @@ $category = $product->category->pluck('cat', 'cat_id');
     {!! Form::select('cat_id', $category, null, ['id' => 'cat_id','class'=>'form-control'])!!}
 </div>
 <div class="form-group">
-    {!! Form::label('Quantity', 'Quantity:') !!}
+    {!! Form::label('Stock', 'Stock:') !!}
     {!! Form::text('quantity',null,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">

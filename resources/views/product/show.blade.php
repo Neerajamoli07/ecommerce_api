@@ -33,7 +33,7 @@
         {!! Form::text('cat_id',$product->category->cat,['class'=>'form-control', 'readonly' => 'true']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('Quantity', 'Quantity:') !!}
+        {!! Form::label('Stock', 'Stock:') !!}
         {!! Form::text('quantity',$product->quantity,['class'=>'form-control', 'readonly' => 'true']) !!}
     </div>
     <div class="form-group">

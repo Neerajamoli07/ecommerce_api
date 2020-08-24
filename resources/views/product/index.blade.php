@@ -13,7 +13,7 @@
             <th>Brand</th>
             <th>Size</th>
             <th>Category</th>
-            <th>Quantity</th>
+            <th>Stock</th>
             <th>Price</th>
             <th>Front Image</th>
             <th>Side Image</th>

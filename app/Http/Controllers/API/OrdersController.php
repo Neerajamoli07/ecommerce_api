@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -63,15 +64,21 @@ class OrdersController extends BaseController
 
          if($order){
           foreach ($input->cart_items as $value){
-             OrderItem::create([
-             'user_id' => $input -> user_id,
-             'order_id' => $order -> id,
-             'product_id' => $value -> product_id,
-             'product_name' => $value -> product_name,
-             'product_image' => $value -> product_image,
-             'product_price' => $value -> product_price,
-             'product_quantity' => $value -> product_quantity
-            ]);
+            $updatedProduct = Product::find($value -> product_id);
+            if($updatedProduct->quantity >= $value -> product_quantity) { 
+                OrderItem::create([
+                'user_id' => $input -> user_id,
+                'order_id' => $order -> id,
+                'product_id' => $value -> product_id,
+                'product_name' => $value -> product_name,
+                'product_image' => $value -> product_image,
+                'product_price' => $value -> product_price,
+                'product_quantity' => $value -> product_quantity
+                ]);
+               $updatedQuantity =  $updatedProduct->quantity - $value -> product_quantity;
+               $updatedProduct::update(["quantity" => $updatedQuantity]);
+            }
+
           }
          }else{
             return $this->sendResponse($order->toArray(), 'Something went wrong.');
