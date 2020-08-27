@@ -41,6 +41,10 @@
         {!! Form::text('price',$product->price,['class'=>'form-control', 'readonly' => 'true']) !!}
     </div>
     <div class="form-group">
+        {!! Form::label('Fresh Product Date', 'Fresh Product Date:') !!}
+        {!! Form::text('fresh_product_date',$product->fresh_product_date,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
         <a href="{{ url('backend/articles')}}" class="btn btn-primary">Back</a>
     </div>
     </form>

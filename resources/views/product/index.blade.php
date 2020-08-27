@@ -8,7 +8,7 @@
         <thead>
         <tr class="bg-info">
             <th>ID</th>
-            <th>Slug</th>
+            <!-- <th>Slug</th> -->
             <th>Name</th>
             <th>Brand</th>
             <th>Size</th>
@@ -18,6 +18,7 @@
             <th>Front Image</th>
             <th>Side Image</th>
             <th>Left Image</th>
+            <th>Fresh Prod Date</th>
             <th colspan="3">Actions</th>
         </tr>
         </thead>
@@ -26,7 +27,7 @@
             {{-- {{ dd($p->size) }}--}}
             <tr>
                 <td>{{ $p->id }}</td>
-                <td>{{ $p->slug }}</td>
+                <!-- <td>{{ $p->slug }}</td> -->
                 <td>{{ $p->name}}</td>
                 <td>{{ $p->brands->brand }}</td>
                 <td>{{implode(",", $p->size->pluck("size")->all())}}</td>
@@ -37,8 +38,10 @@
                 <td><img src="{{asset('images/products/'.$p->a_img)}}" height="35" width="25"></td>
                 <td><img src="{{asset('images/products/'.$p->b_img)}}" height="35" width="25"></td>
                 <td><img src="{{asset('images/products/'.$p->c_img)}}" height="35" width="25"></td>
+                <td>{{ $p->fresh_product_date }}</td>
                 <td><a href="{{route('articles.show',$p->id)}}" class="btn btn-primary">Read</a></td>
                 <td><a href="{{route('articles.edit',$p->id)}}" class="btn btn-warning">Update</a></td>
+                
                 <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['articles.destroy', $p->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

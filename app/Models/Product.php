@@ -30,7 +30,8 @@ class Product extends Model
         'brand_id',
         'cat_id',
         'quantity',
-        'price'
+        'price',
+        'fresh_product_date'
     ];
 
     /**

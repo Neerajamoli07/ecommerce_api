@@ -46,5 +46,9 @@
     {!! Form::text('price',null,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('Fresh Product Date', 'Fresh Product Date:') !!}
+    {!! Form::text('fresh_product_date',null,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
 </div>
