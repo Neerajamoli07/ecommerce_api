@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\MainService;
+use App\Models\Product;
+use App\Models\Category;
 
 class MainController extends Controller
 {
@@ -139,4 +141,18 @@ class MainController extends Controller
         session()->flash('flash_message', 'You have been successfully Logged In!');
         return view('messages.welcome')->with('user', $user);
     }
+
+    public function products()
+    {
+        $products = Product::all();
+        return response()->json(['success' => true,'data' => $products], 200);
+
+    }
+    
+    public function productCategories()
+    {
+        $categories = Category::all();
+        return response()->json(['success' => true,'data' => $categories], 200);
+    }
+
 }
