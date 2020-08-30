@@ -155,4 +155,11 @@ class MainController extends Controller
         return response()->json(['success' => true,'data' => $categories], 200);
     }
 
+    public function categoryProduct($id)
+    {
+        // show product on the basis of category id
+      $products = Product::where(['cat_id' => $id])->get();
+      return response()->json(['success' => true,'data' => $products, 'msg' => 'Products retrieved successfully.']);
+    }
+
 }

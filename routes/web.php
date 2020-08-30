@@ -40,6 +40,8 @@ Route::get('/products', 'MainController@products');
 
 Route::get('/productCategories', 'MainController@productCategories');
 
+Route::get('/categoryProduct/{id}', 'MainController@categoryProduct');
+
 Route::get('/cms', 'MainController@index');
 
 Route::get('/contacts', 'MainController@contacts');
