@@ -20,11 +20,21 @@ class RegisterController extends BaseController
      */
     public function register(Request $request)
     {
+        $input = $request->all();
+       
+        if($input['email']){
+           $user = User::where('email',$input['email'])->first();
+           if($user){
+               $data = ['email' => ["Email already exist."]];
+            return $this->sendError('Validation Error.', $data);
+           }   
+        }
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'mobile_number' => 'required',
+            'mobile_number' => 'required|unique:users',
         ]);
 
 
@@ -33,7 +43,7 @@ class RegisterController extends BaseController
         }
 
 
-        $input = $request->all();
+        
         $input['password'] = bcrypt($input['password']);
         $input['rember_token'] = str_random(30);
         $input['api_token'] = $input['rember_token'];
