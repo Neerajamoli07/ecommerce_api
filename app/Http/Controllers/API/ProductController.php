@@ -90,15 +90,17 @@ class ProductController extends BaseController
      return $this->sendResponse($products->toArray(), 'Product retrieve successfully.');
     }
 
-    public function productIndex($page)
+    public function productIndex($page, $perpage)
     {
-        //return $page;
-        If (!empty($page)) {
+        
+        If (!empty($page) && !empty($perpage) ) {
             $page = $page;
+            $perpage = $perpage;
         } else {
             $page = 1;
+            $perpage = 1;
         }
-        $perpage = 5;
+       // $perpage = 5;
         $offset = ($page - 1) * $perpage;
         $products = DB::table('products')
                         ->skip($offset)->take($perpage)->get();

@@ -31,7 +31,7 @@ Route::middleware('auth:api')->group( function () {
 });
 
 Route::middleware('auth:api')->group( function () {
-	Route::get('allProduct/{page}', 'API\ProductController@productIndex');	
+	Route::get('allProduct/{page}/{perpage}', 'API\ProductController@productIndex');	
 });
 
 Route::middleware('auth:api')->group( function () {
