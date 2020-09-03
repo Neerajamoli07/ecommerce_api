@@ -123,6 +123,7 @@ class LoginController extends BaseController
           $user ->email = $request->get('email');
           $user ->mobile_number = $request->get('mobile_number');
           $user ->address = $request->get('address');
+          $user->current_address = "address1";
 
           if($user->save()) {
             return response()->json([
@@ -139,5 +140,43 @@ class LoginController extends BaseController
       }
 
   }
+
+  public function updateSecondAddress(Request $request){
+    $rules = [
+      'address2'=>'required',
+      'user_id'=>'required'
+    ];
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+      // Validation failed
+      return response()->json([
+        'message' => $validator->messages(),
+      ]);
+    } else {
+      // Fetch User
+      $user = User::where('id',$request->get('user_id'))->first();
+    
+      if($user) {
+        $user ->name  = $request->get('name');
+        $user ->email = $request->get('email');
+        $user ->mobile_number = $request->get('mobile_number');
+        $user ->address2 = $request->get('address2');
+        $user->current_address = "address2";
+
+        if($user->save()) {
+          return response()->json([
+            'status'       => true,
+            'address'         => $user->address2,
+          ]);
+        }
+      } else {
+        return response()->json([
+          'status'       => false,
+          'message' => 'User not found',
+        ]);
+      }
+    }
+
+}
     
 }

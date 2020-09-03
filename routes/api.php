@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\LoginController@login');
 Route::post('updateProfile', 'API\LoginController@updateProfile');
+Route::post('updateSecondAddress', 'API\LoginController@updateSecondAddress');
 
 Route::get('searchProduct/{data}', 'API\ProductController@searchProduct');
 
