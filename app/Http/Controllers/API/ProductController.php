@@ -89,4 +89,21 @@ class ProductController extends BaseController
             ->orderBy('name')->get();
      return $this->sendResponse($products->toArray(), 'Product retrieve successfully.');
     }
+
+    public function productIndex($page)
+    {
+        //return $page;
+        If (!empty($page)) {
+            $page = $page;
+        } else {
+            $page = 1;
+        }
+        $perpage = 5;
+        $offset = ($page - 1) * $perpage;
+        $products = DB::table('products')
+                        ->skip($offset)->take($perpage)->get();
+      return response()->json(['success' => true,'data' => $products, 'msg' => 'Products retrieved successfully.']);
+    }
+
+
 }

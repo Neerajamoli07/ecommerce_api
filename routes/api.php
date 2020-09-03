@@ -29,6 +29,11 @@ Route::get('searchProduct/{data}', 'API\ProductController@searchProduct');
 Route::middleware('auth:api')->group( function () {
 	Route::resource('products', 'API\ProductController');
 });
+
+Route::middleware('auth:api')->group( function () {
+	Route::get('allProduct/{page}', 'API\ProductController@productIndex');	
+});
+
 Route::middleware('auth:api')->group( function () {
 	Route::resource('categories', 'API\CategoryController');
 });
