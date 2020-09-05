@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\User; 
+use App\UserAddress;
 use Illuminate\Support\Facades\Auth; 
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
@@ -143,40 +144,58 @@ class LoginController extends BaseController
 
   public function updateSecondAddress(Request $request){
     $rules = [
-      'address2'=>'required',
+      'address'=>'required',
       'user_id'=>'required'
     ];
     $validator = Validator::make($request->all(), $rules);
     if ($validator->fails()) {
-      // Validation failed
       return response()->json([
         'message' => $validator->messages(),
       ]);
     } else {
-      // Fetch User
-      $user = User::where('id',$request->get('user_id'))->first();
+      $user = UserAddress::where('id',$request->get('id'))->first();
     
       if($user) {
-        $user ->name  = $request->get('name');
-        $user ->email = $request->get('email');
-        $user ->mobile_number = $request->get('mobile_number');
-        $user ->address2 = $request->get('address2');
-        $user->current_address = "address2";
+        $user ->address  = $request->get('address');
 
         if($user->save()) {
           return response()->json([
             'status'       => true,
-            'address'         => $user->address2,
+            'address'         => $user->address,
           ]);
         }
       } else {
-        return response()->json([
-          'status'       => false,
-          'message' => 'User not found',
+        $user_address = UserAddress::create([
+          'user_id' => $request->get('user_id'),
+          'address' => $request->get('address')
         ]);
+        if($user_address){
+          return response()->json([
+            'status'       => true,
+            'address'         => $user_address->address,
+          ]);
+        }else{
+          return response()->json([
+            'status'       => true,
+            'address'         => "Something went wrong! please try again!",
+          ]);
+        }
+
       }
     }
+  }
 
-}
+  public function userAdresses(){
+    $address = UserAddress::all();
+    return $this->sendResponse($address->toArray(), 'User Address retrieved successfully.');
+
+  }
+
+  public function deleteAddress($address_id){
+       $user_address = UserAddress::find($address_id);
+       $user_address->delete();
+       return $this->sendResponse($user_address->toArray(), 'Address deleted successfully.');
+
+  }
     
 }

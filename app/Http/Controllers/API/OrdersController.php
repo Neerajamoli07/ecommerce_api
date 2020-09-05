@@ -108,7 +108,7 @@ class OrdersController extends BaseController
          foreach($orders_data as $index=>$record){
             $order = [];
             $order_placed_data = Order::find($record[0]['order_id']);
-            $order['total_amount'] = $order_placed_data->amount;
+            $order['total_amount'] = $order_placed_data->amount ? $order_placed_data->amount : 0;
             $order['order_date'] = $order_placed_data->order_date;
             $order["order_id"] = $record[0]['order_id'];
             $order["cart_items"] = $record;         
