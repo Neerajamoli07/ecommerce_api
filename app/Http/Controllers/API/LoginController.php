@@ -161,7 +161,7 @@ class LoginController extends BaseController
         if($user->save()) {
           return response()->json([
             'status'       => true,
-            'address'         => $user->address,
+            'address'         => $user,
           ]);
         }
       } else {
@@ -172,7 +172,7 @@ class LoginController extends BaseController
         if($user_address){
           return response()->json([
             'status'       => true,
-            'address'         => $user_address->address,
+            'address'         => $user_address,
           ]);
         }else{
           return response()->json([
