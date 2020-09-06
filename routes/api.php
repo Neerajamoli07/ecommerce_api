@@ -26,7 +26,7 @@ Route::post('login', 'API\LoginController@login');
 Route::post('updateProfile', 'API\LoginController@updateProfile');
 Route::post('updateSecondAddress', 'API\LoginController@updateSecondAddress');
 
-Route::get('userAdresses','API\LoginController@userAdresses');
+Route::get('userAdresses/{user_id}','API\LoginController@userAdresses');
 Route::delete('destroyAddress/{address_id}','API\LoginController@deleteAddress');
 
 Route::get('searchProduct/{data}', 'API\ProductController@searchProduct');

@@ -185,10 +185,15 @@ class LoginController extends BaseController
     }
   }
 
-  public function userAdresses(){
-    $address = UserAddress::all();
-    return $this->sendResponse($address->toArray(), 'User Address retrieved successfully.');
-
+  public function userAdresses($user_id){
+    if (!$user_id) {
+      return response()->json([
+        'message' => "user id is required",
+      ]);
+    } else {
+      $address = UserAddress::where('user_id',$user_id)->get();
+      return $this->sendResponse($address, 'User Address retrieved successfully.');
+    }
   }
 
   public function deleteAddress($address_id){
