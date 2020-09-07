@@ -145,7 +145,8 @@ class LoginController extends BaseController
   public function updateSecondAddress(Request $request){
     $rules = [
       'address'=>'required',
-      'user_id'=>'required'
+      'user_id'=>'required',
+      'title' => 'required',
     ];
     $validator = Validator::make($request->all(), $rules);
     if ($validator->fails()) {
@@ -157,6 +158,7 @@ class LoginController extends BaseController
     
       if($user) {
         $user ->address  = $request->get('address');
+        $user ->title  = $request->get('title');
 
         if($user->save()) {
           return response()->json([
@@ -167,7 +169,8 @@ class LoginController extends BaseController
       } else {
         $user_address = UserAddress::create([
           'user_id' => $request->get('user_id'),
-          'address' => $request->get('address')
+          'address' => $request->get('address'),
+          'title' => $request->get('title')
         ]);
         if($user_address){
           return response()->json([
