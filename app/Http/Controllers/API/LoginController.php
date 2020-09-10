@@ -87,6 +87,7 @@ class LoginController extends BaseController
                 'api_token' => $updated_token,
                 'email'        => $user->email,
                 'address'      => $user->address,
+                'default_address'      => $user->address2,
               ]);
             }
           } else {
@@ -106,7 +107,6 @@ class LoginController extends BaseController
 
   public function updateProfile(Request $request){
       $rules = [
-        'address'=>'required',
         'user_id'=>'required'
       ];
       $validator = Validator::make($request->all(), $rules);
@@ -204,6 +204,47 @@ class LoginController extends BaseController
        $user_address->delete();
        return $this->sendResponse($user_address->toArray(), 'Address deleted successfully.');
 
+  }
+
+  public function currentAddress(Request $request){
+    $rules = [
+      'id' => 'required',
+      'user_id'=>'required'
+    ];
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+      // Validation failed
+      return response()->json([
+        'message' => $validator->messages(),
+      ]);
+    } else {
+      // Fetch User
+      $user_address = UserAddress::find($request->get('id'));
+
+      $user = User::where('id',$request->get('user_id'))->first();
+    
+      if($user) {
+        $user ->address2 = $user_address->address;
+
+        if($user->save()) {
+          return response()->json([
+            'status'       => true,
+            'user_id'      => $user->id,
+            'name'         => $user->name,
+            'mobile_number'=> $user->mobile_number,
+            'api_token' => $user->api_token,
+            'email'        => $user->email,
+            'address'      => $user->address,
+            'default_address' => $user->address2,
+          ]);
+        }
+      } else {
+        return response()->json([
+          'status'       => "Invaild",
+          'message' => 'User not found',
+        ]);
+      }
+    }
   }
     
 }
