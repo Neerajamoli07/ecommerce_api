@@ -40,4 +40,10 @@ class User extends Authenticatable implements  HasRoleAndPermissionContract
     {
         return $this->hasMany('App\Models\OrderItem');
     }
+    
+    public function userAddresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
 }

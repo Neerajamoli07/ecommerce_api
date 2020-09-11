@@ -255,6 +255,7 @@ class LoginController extends BaseController
       ]);
     } else {
       $user = User::find($user_id);
+      $user_address = UserAddress::where('user_id',$user_id)->get();
       if($user){
         return response()->json([
           'status'       => true,
@@ -265,6 +266,7 @@ class LoginController extends BaseController
           'email'        => $user->email,
           'address'      => $user->address,
           'default_address' => $user->address2,
+          'multiple_address' => $user_address
         ]);
       }else{
         return response()->json([
