@@ -30,7 +30,7 @@ Route::post('currentAddress','API\LoginController@currentAddress');
 
 Route::get('userAdresses/{user_id}','API\LoginController@userAdresses');
 Route::delete('destroyAddress/{address_id}','API\LoginController@deleteAddress');
-
+Route::get('userInfo/{user_id}','API\LoginController@userInfo');
 Route::get('searchProduct/{data}', 'API\ProductController@searchProduct');
 
 Route::middleware('auth:api')->group( function () {

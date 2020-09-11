@@ -246,5 +246,33 @@ class LoginController extends BaseController
       }
     }
   }
+
+  public function userInfo($user_id){
+    //return $user_id;
+    if (!$user_id) {
+      return response()->json([
+        'message' => "user id is required",
+      ]);
+    } else {
+      $user = User::find($user_id);
+      if($user){
+        return response()->json([
+          'status'       => true,
+          'user_id'      => $user->id,
+          'name'         => $user->name,
+          'mobile_number'=> $user->mobile_number,
+          'api_token' => $user->api_token,
+          'email'        => $user->email,
+          'address'      => $user->address,
+          'default_address' => $user->address2,
+        ]);
+      }else{
+        return response()->json([
+          'status'       => true,
+          'message' => 'User not found',
+        ]);
+      }
+    }
+  }
     
 }
