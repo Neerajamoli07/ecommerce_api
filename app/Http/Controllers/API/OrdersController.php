@@ -59,7 +59,10 @@ class OrdersController extends BaseController
             'img' => $input->cart_items[0]->product_image,
             'color' => 'red',
             'quantity' => $input->cart_items[0]->product_quantity,
-            'amount' => $input->total_amount
+            'amount' => $input->total_amount,
+            'delivery_time' => $input->delivery_time,
+            'delivery_date' => $input->delivery_date,
+            'delivery_address' => $input->delivery_address
          ]);
 
          if($order){
@@ -76,7 +79,7 @@ class OrdersController extends BaseController
                 'product_quantity' => $value -> product_quantity
                 ]);
                $updatedQuantity =  $updatedProduct->quantity - $value -> product_quantity;
-               $updatedProduct::update(["quantity" => $updatedQuantity]);
+               $updatedProduct->save(["quantity" => $updatedQuantity]);
             }
 
           }

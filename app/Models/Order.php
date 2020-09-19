@@ -29,6 +29,9 @@ class Order extends Model
         'color',
         'quantity',
         'amount',
+        'delivery_time',
+        'delivery_date',
+        'delivery_address'
 
     ];
 
