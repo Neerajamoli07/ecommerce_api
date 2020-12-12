@@ -39,7 +39,7 @@ class OrdersController extends BaseController
         //img, quantity,amount
         $input_data = $request->getContent();
         $input = json_decode($input_data);
-
+        
         $validation_input = [$input->user_id,$input->cart_items[0]->product_id];
         
         if(!($validation_input[0] && $validation_input[1]) ){
@@ -49,16 +49,46 @@ class OrdersController extends BaseController
             ];
             return $this->sendError('Validation Error.', $validator);       
         }
+        $order_status = '';
+        $payment_status = '';
+        if($input->pay_status){
+            $payStatus = $input->pay_status;
+            if($payStatus == 1){
+                $payment_status = "Pending";
+            }
+            if($payStatus == 2){
+                $payment_status = "waiting";
+            }
+            if($payStatus == 3){
+                $payment_status = "success";
+            }
+        }
+
+        if($input->order_status){
+            $orderStatus = $input->order_status;
+            if($orderStatus == 1){
+                $order_status= "Order Pending";
+            }
+            if($orderStatus == 2){
+                $order_status= "Order Complete";
+            }
+            if($orderStatus == 3){
+                $order_status= "Order Cancel";
+            }
+        }
         
          $order = Order::create([
             'user_id' => $input->user_id,
-            'order_date' => date('Y-m-d H:i:s'),
+            'order_date' => $input->order_date,
             'status' => 2,
+            'order_status' => $order_status,
+            'pay_status' => $payment_status,
+            'pay_type' => $input->pay_type,
             'product_id' => $input->cart_items[0]->product_id,
             'size' => 'XL',
             'img' => $input->cart_items[0]->product_image,
             'color' => 'red',
-            'quantity' => $input->cart_items[0]->product_quantity,
+            'quantity' => $input->total_quantity,
             'amount' => $input->total_amount,
             'delivery_time' => $input->delivery_time,
             'delivery_date' => $input->delivery_date,
@@ -69,6 +99,17 @@ class OrdersController extends BaseController
           foreach ($input->cart_items as $value){
             $updatedProduct = Product::find($value -> product_id);
             if($updatedProduct->quantity >= $value -> product_quantity) { 
+                $additionals = $value->additionals;
+                $additonal_info = '';
+                $length = count($additionals);
+                foreach($additionals as $index => $additional){
+                  if($index = $length-1){
+                    $additonal_info .= "Name :".$additional->name.","."Price :".$additional->price;
+                  }else{
+                    $additonal_info .= "Name :".$additional->name.","."Price :".$additional->price .",";
+                  }
+                }
+                
                 OrderItem::create([
                 'user_id' => $input -> user_id,
                 'order_id' => $order -> id,
@@ -76,7 +117,8 @@ class OrdersController extends BaseController
                 'product_name' => $value -> product_name,
                 'product_image' => $value -> product_image,
                 'product_price' => $value -> product_price,
-                'product_quantity' => $value -> product_quantity
+                'product_quantity' => $value -> product_quantity,
+                'additional_info' =>$additonal_info
                 ]);
                $updatedQuantity =  $updatedProduct->quantity - $value -> product_quantity;
                $updatedProduct->save(["quantity" => $updatedQuantity]);
@@ -167,5 +209,30 @@ class OrdersController extends BaseController
         // $product->delete();
         // return $this->sendResponse($product->toArray(), 'Product deleted successfully.');
     
+    }
+
+    //order paid status
+    public function paidStatus($order_id,$pay_status){
+        $order = Order::find($order_id);
+        $payment_status = '';
+        if($pay_status){
+            if($pay_status == 1){
+                $payment_status = "Pending";
+            }
+            if($pay_status == 2){
+                $payment_status = "waiting";
+            }
+            if($pay_status == 3){
+                $payment_status = "success";
+            }
+        }
+        
+        if($order) {
+            $order->pay_status = $payment_status;
+            $order->save();
+            return $this->sendResponse($order, 'Order pay status update successfully.');
+        }else{
+            return $this->sendError('Order not found.'); 
+        }
     }
 }

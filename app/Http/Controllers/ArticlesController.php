@@ -6,6 +6,7 @@ use App\Http\Requests\CreateProduct;
 use App\Http\Requests;
 use App\Models\Product;
 use App\Models\Size;
+use App\User;
 use Illuminate\Support\Facades\Session;
 use Request;
 
@@ -40,9 +41,91 @@ class ArticlesController extends Controller
     public function store(CreateProduct $request)
     {
         $data = $this->proccesData($request);
+        $rates='';
+        foreach ($data['rate'] as $value){
+            if($value !=null){
+                $rates .= $value . ",";
+            }
+        }
+        $data['rate'] = $rates;
         $product = Product::create($data);
         $product->size()->attach($data['size_id']);
         Session::flash('flash_message', 'Product successfully added!');
+        
+        // send notification to all user
+        $deviceids = [];
+        $users = User::all();
+        foreach ($users as $user){
+            if($user->deviceid != null){
+              $deviceids[] = $user->deviceid;
+            }
+            
+        }
+
+
+		// send notification here
+		
+		 $api_key = 'AAAA6lraLoE:APA91bEGIoXMt5BYuvG9zvW6qhxTCIcziGDHQIRi9Ra3nlWcUtY86QHyO2n-jIBv4bFw_pRwKHjLe-LIivmRCzEOoZ18qLqtcMOHPAGlLiRp5L8ShHIQQuD65E3Akxv6a82sv5iaRKUx';
+ 
+         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+ 
+         $token='cQcCKoXfTZq2-uJdqHIRFq:APA91bE_399N8cxy8dtupQsbBvKdLmOiGAXLrEQA774zglvn_ekGsW_owYhsHZbecXw6b52K_vw5Px0GFg_YesBd3ylwc-x9LguSdYbTirt63Nqi597rktI3ZT2sAb3go4Ob-gcQ2fLZ'; //testing device id
+         $deviceids[] = $token;
+         
+
+ 
+         $title = "FreshFromVypin";
+         $message =  "FreshFromVypin just added  " . $data['name'] . " .";
+         $customData = "";
+         $tokenList = $deviceids;
+        
+   
+  
+        $notification = [
+            'title' => $title,
+            'body' => $message,
+            'data' => $customData,
+            'vibrate'	=> 1,
+	        'sound'		=> 1,
+            'icon' =>'https://ecommerce.freshfromvypin.com/images/app_logo.jpg'
+        ];
+        $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
+
+       
+
+        $headers = [
+            'Authorization: key=' . $api_key,
+            'Content-Type: application/json'
+        ];
+        
+        $regIdChunk=array_chunk($tokenList,1000);
+        $results = [];
+
+        foreach($regIdChunk as $RegId){
+           $fcmNotification = [
+            'registration_ids' => $RegId, //multple token array
+            // 'to'        => $token, //single token
+            'notification' => $notification,
+            'data' => $extraNotificationData
+           ];
+           
+           $ch = curl_init();
+           curl_setopt($ch, CURLOPT_URL,$fcmUrl);
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+           curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+           $result = curl_exec($ch);
+        
+            if ($result === FALSE) {
+              die('FCM Send Error: ' . curl_error($ch));
+            }
+        
+           curl_close($ch);;
+           $results[] = $result;
+        }
+        
         return redirect()->back();
     }
 
@@ -82,10 +165,93 @@ class ArticlesController extends Controller
     public function update($id, CreateProduct $request)
     {
         $data = $this->proccesData($request);
+
+        $rates='';
+        foreach ($data['rate'] as $value){
+            if($value !=null){
+                $rates .= $value . ",";
+            }
+        }
+        $data['rate'] = $rates;
+       
         $product = Product::find($id);
         $product->update($data);
         $product->size()->sync($data['size_id']);
         Session::flash('flash_message', 'Product successfully updated!');
+        // send notification to all user
+        $deviceids = [];
+        $users = User::all();
+        foreach ($users as $user){
+            if($user->deviceid != null){
+              $deviceids[] = $user->deviceid;
+            }
+            
+        }
+
+
+		// send notification here
+		
+		 $api_key = 'AAAA6lraLoE:APA91bEGIoXMt5BYuvG9zvW6qhxTCIcziGDHQIRi9Ra3nlWcUtY86QHyO2n-jIBv4bFw_pRwKHjLe-LIivmRCzEOoZ18qLqtcMOHPAGlLiRp5L8ShHIQQuD65E3Akxv6a82sv5iaRKUx';
+ 
+         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
+ 
+         $token='cQcCKoXfTZq2-uJdqHIRFq:APA91bE_399N8cxy8dtupQsbBvKdLmOiGAXLrEQA774zglvn_ekGsW_owYhsHZbecXw6b52K_vw5Px0GFg_YesBd3ylwc-x9LguSdYbTirt63Nqi597rktI3ZT2sAb3go4Ob-gcQ2fLZ'; //testing device id
+         $deviceids[] = $token;
+         
+
+ 
+         $title = "FreshFromVypin";
+         $message =  "FreshFromVypin just added Product  " . $data['name'] . " .";
+         $customData = "";
+         $tokenList = $deviceids;
+        
+   
+  
+        $notification = [
+            'title' => $title,
+            'body' => $message,
+            'data' => $customData,
+            'vibrate'	=> 1,
+	        'sound'		=> 1,
+            'icon' =>'https://ecommerce.freshfromvypin.com/images/app_logo.jpg'
+        ];
+        $extraNotificationData = ["message" => $notification,"moredata" =>'dd'];
+
+       
+
+        $headers = [
+            'Authorization: key=' . $api_key,
+            'Content-Type: application/json'
+        ];
+        
+        $regIdChunk=array_chunk($tokenList,1000);
+        $results = [];
+
+        foreach($regIdChunk as $RegId){
+           $fcmNotification = [
+            'registration_ids' => $RegId, //multple token array
+            // 'to'        => $token, //single token
+            'notification' => $notification,
+            'data' => $extraNotificationData
+           ];
+           
+           $ch = curl_init();
+           curl_setopt($ch, CURLOPT_URL,$fcmUrl);
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+           curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
+           $result = curl_exec($ch);
+        
+            if ($result === FALSE) {
+              die('FCM Send Error: ' . curl_error($ch));
+            }
+        
+           curl_close($ch);;
+           $results[] = $result;
+        }
+        
         return redirect()->back();
     }
 

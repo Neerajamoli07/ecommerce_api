@@ -34,6 +34,7 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'pin_code' => 'required',
             'mobile_number' => 'required|unique:users',
         ]);
 
@@ -47,6 +48,7 @@ class RegisterController extends BaseController
         $input['password'] = bcrypt($input['password']);
         $input['rember_token'] = str_random(30);
         $input['api_token'] = $input['rember_token'];
+        $input['pin_code'] = $input['pin_code'];
         $user = User::create($input);
         $success['api_token'] =   $input['api_token'];
         $success['name'] =  $user->name;

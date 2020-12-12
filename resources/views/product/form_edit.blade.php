@@ -32,9 +32,35 @@ $brands = $product->brands->pluck('brand', 'brand_id');
     {!! Form::select('brand_id', $brands, null, ['id' => 'brand_id','class'=>'form-control'])!!}
 </div>
 <div class="form-group">
+   <?php
+     if($product->rate != null){ 
+        $rates = explode(",",$product->rate);
+       }else{
+         $rates = explode(",",",,,,,,,,,,");
+       }
+        
+     //print_r($rates);
+     $key = 0;
+   ?>
     @foreach ($checkbox as $s)
+        
         {!! Form::label($s->size,$s->size) !!}
         {!! Form::checkbox( 'size[]',$s->size_id, in_array($s->size_id, $sizes_array),['id' => $s['size_id'],'class' => 'md-check'])!!}
+        <?php
+         
+         if(in_array($s->size_id, $sizes_array)){
+           
+          ?>   
+            <input placeholder="Enter Rate" name="rate[]" type="text" value="<?php echo $rates[$key] ?>">
+         <?php  
+         $key++; 
+         }else{
+             ?>
+            <input placeholder="Enter Rate" name="rate[]" type="text" value="">
+         
+         <?php }
+        ?>
+        
     @endforeach
 </div>
 <?php $sizes_array = $product->category->pluck("cat_id")->all();

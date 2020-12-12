@@ -1,10 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-top">
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #01A65A;">
         <div class="navbar-header">
             <button type="button" class="navbar-expand-toggle">
                 <i class="fa fa-bars icon"></i>
             </button>
             <ol class="breadcrumb navbar-breadcrumb">
+            <img width="40px" height="40px" style="border-radius: 50%" class="logo" src="{{ url('images') }}/app_logo.jpg" alt="app logo"/>
                 @admin
                     <li>Admin Panel</li>
                 @endadmin
@@ -13,6 +14,7 @@
                 @enduser
                 <li class="active">{{Auth::user()->email}}</li>
                 <!-- <li class="active"><a href="{{ url('cms') }}">Back to Site</a></li> -->
+                
             </ol>
             <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                 <i class="fa fa-th icon"></i>

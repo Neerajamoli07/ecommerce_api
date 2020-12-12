@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #01A65A;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -44,6 +44,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                     <li><img width="60px" height="60px" style="border-radius: 50%" class="logo" src="{{ url('images') }}/app_logo.jpg" alt=""/></li>
                         &nbsp;
                     </ul>
 
@@ -51,8 +52,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}" style="color: #ffffff;">Login</a></li>
+                            <li><a href="{{ route('register') }}" style="color: #ffffff;">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

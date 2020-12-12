@@ -13,3 +13,4 @@ Route::get('Denim/{slug}/{id}' , 'BaseController@single');
 Route::get('Pants/{slug}/{id}' , 'BaseController@single');
 Route::get('Casual/{slug}/{id}' , 'BaseController@single');
 Route::get('Tops/{slug}/{id}' , 'BaseController@single');
+

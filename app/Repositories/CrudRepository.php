@@ -125,7 +125,7 @@ class CrudRepository
             $grid->edit('/backend/subcategory/edit');
             $grid->link('/backend/subcategory/edit', "New Subategory", "TR");
         } else {
-            $grid = DataGrid::source($this->category->where('parent_id', 0));
+            $grid = DataGrid::source(Category::with('parent'));
             $grid->label('Main category');
             $grid->attributes(array("class" => "table table-striped"));
             $grid->add('cat_id', 'ID', true)->style("width:100px");
@@ -315,14 +315,17 @@ class CrudRepository
         $grid->add('users.name', 'Customer', 'text');
         $grid->add('order_date', 'Date');
         $grid->add('<a href="/backend/products/edit?show={{ $products->product_id }}">{{ $products->name }}</a>', 'Product');
-        $grid->add('size', 'Size');
+        // $grid->add('size', 'Size');
         $grid->add('<img src="/images/products/{{ $img }}" height="25" width="25">', 'Image');
-        $grid->add('color', 'Color');
+        // $grid->add('color', 'Color');
         $grid->add('quantity', 'Qty');
+        $grid->add('pay_type', 'Pay Type');
+        $grid->add('pay_status', 'Pay Status');
+
         $grid->add('amount', 'Amount');
         $grid->edit('/backend/orders/edit');
         $grid->link('/backend/orders/edit', "TR");
-        $grid->orderBy('id', 'asc');
+        $grid->orderBy('id', 'desc');
         $grid->paginate(10);
         return $grid;
     }
@@ -396,7 +399,7 @@ class CrudRepository
     {   
         $grid = DataGrid::source($this->monthlyOrdersFilter());
         $grid->label('Total Orders');
-        $grid->attributes(array("class" => "table table-striped"));
+        $grid->attributes(array("class" => "table table-striped","id" =>"converter"));
         $grid->add('id', 'ID', true)->style("width:100px");
         $grid->add('users.name', 'Customer', 'text');
         $grid->add('order_date', 'Date');

@@ -78,6 +78,12 @@ class LoginController extends BaseController
             $tokenArray = ['api_token' => $updated_token];
             $login = User::where('mobile_number',$request->mobile_number)->update($tokenArray);
             
+            try {
+              $user->deviceid = $request->deviceid;
+              $user->save();
+            }catch(\Exception $e) {
+                 //echo 'Message: ' .$e->getMessage();
+            }
             if($login) {
               return response()->json([
                 'status'       => "sucess",
@@ -87,6 +93,7 @@ class LoginController extends BaseController
                 'api_token' => $updated_token,
                 'email'        => $user->email,
                 'address'      => $user->address,
+                'deviceid'     => $login->deviceid,
                 'default_address'      => $user->address2,
               ]);
             }
@@ -159,6 +166,10 @@ class LoginController extends BaseController
       if($user) {
         $user ->address  = $request->get('address');
         $user ->title  = $request->get('title');
+        $user ->pin_code  = $request->get('pin_code');
+        $user ->line1_address  = $request->get('line1_address');
+        $user ->line2_address  = $request->get('line2_address');
+        $user ->landmark  = $request->get('landmark');
 
         if($user->save()) {
           return response()->json([
@@ -170,7 +181,11 @@ class LoginController extends BaseController
         $user_address = UserAddress::create([
           'user_id' => $request->get('user_id'),
           'address' => $request->get('address'),
-          'title' => $request->get('title')
+          'pin_code' => $request->get('pin_code'),
+          'title' => $request->get('title'),
+          'line1_address'=> $request->get('line1_address'),
+          'line2_address'=> $request->get('line2_address'),
+          'landmark'=> $request->get('landmark'),
         ]);
         if($user_address){
           return response()->json([
@@ -256,6 +271,7 @@ class LoginController extends BaseController
     } else {
       $user = User::find($user_id);
       $user_address = UserAddress::where('user_id',$user_id)->get();
+      $default_address = UserAddress::where('address',$user->address2)->get();
       if($user){
         return response()->json([
           'status'       => true,
@@ -265,7 +281,7 @@ class LoginController extends BaseController
           'api_token' => $user->api_token,
           'email'        => $user->email,
           'address'      => $user->address,
-          'default_address' => $user->address2,
+          'default_address' => $default_address,
           'multiple_address' => $user_address
         ]);
       }else{

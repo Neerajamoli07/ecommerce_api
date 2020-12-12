@@ -33,6 +33,26 @@
     @include('backend.footer')
             <!-- //FOOTER -->
 </div>
+
+<script src="{{ asset('/js/convertdocument/jquery-3.5.1.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/jszip.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/pdfmake.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/vfs_fonts.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/convertdocument/buttons.html5.min.js') }}" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+    $('#converter').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'pdf'
+        ]
+    } );
+    $('#converter_filter').css("display", "none");
+} );
+</script>
 </body>
 
 </html>

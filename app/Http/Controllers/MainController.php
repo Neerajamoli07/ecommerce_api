@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Services\MainService;
 use App\Models\Product;
 use App\Models\Category;
+use App\Postal;
+use App\Models\Size;
+use App\Models\OrderItem;
 
 class MainController extends Controller
 {
@@ -145,7 +148,34 @@ class MainController extends Controller
     public function products()
     {
         $products = Product::all();
-        return response()->json(['success' => true,'data' => $products], 200);
+        $products_data = $products->toArray();
+        
+        $products_format = array();
+         foreach($products_data as $index=>$record){
+            $data = [];
+            $p = product::where('id',$record['id'])->first();
+            $data['id'] = $record['id'] ? $record['id'] : 0;
+            $data['slug'] = $record['slug'] ? $record['slug'] : "-";
+            $data["name"] = $record['name'] ? $record['name'] : "-";
+            $data["description"] = $record['description'] ? $record['description'] : "-"; 
+            $data["a_img"] = $record['a_img'] ? $record['a_img'] : "-";  
+            $data["b_img"] = $record['b_img'] ? $record['b_img'] : "-";  
+            $data["c_img"] = $record['c_img'] ? $record['c_img'] : "-";  
+            $data["brand_id"] = $record['brand_id'] ? $record['brand_id'] : "-";  
+            $data["cat_id"] = $record['cat_id'] ? $record['cat_id'] : "-";  
+            $data["parent_id"] = $record['parent_id'] ? $record['parent_id'] : "-";  
+            $data["quantity"] = $record['quantity'] ? $record['quantity'] : "-";  
+            $data["price"] = $record['price'] ? $record['price'] : "-";
+            $data["size"] = implode(",", $p->size->pluck("size")->all()) ;
+            $data["rate"] = $record['rate'] ? $record['rate'] : "-"; 
+            $data["fresh_product_date"] = $record['fresh_product_date'] ? $record['fresh_product_date'] : "-";         
+            $products_format[] = $data;
+        }
+
+      // return $this->sendResponse($products_format, 'Products retrieved successfully.');
+    
+       
+        return response()->json(['success' => true,'data' => $products_format], 200);
 
     }
     
@@ -160,6 +190,56 @@ class MainController extends Controller
         // show product on the basis of category id
       $products = Product::where(['cat_id' => $id])->get();
       return response()->json(['success' => true,'data' => $products, 'msg' => 'Products retrieved successfully.']);
+    }
+    
+    //send OTP to mobile 
+    public function sendOtp($mobileno)
+    {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        $user          = 'prabhath';
+        $password      = 'freshfromvypin';
+        $mobileNumbers = $mobileno;
+        $randomnumber = rand(1111,9999);
+        $message       =  urlencode('Your OTP for FreshFromVypin login is '. $randomnumber);
+        $senderid      = "FFVYPN";
+        $url           = "http://sapteleservices.com/SMS_API/sendsms.php";
+        $ch          = curl_init();
+        if (!$ch) {
+           die("Couldn't initialize a cURL handle");
+        }
+        $ret = curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "username=$user&password=$password&mobile=$mobileNumbers&message=$message&sendername=$senderid&routetype=1");
+        $ret            = curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $curlresponse = curl_exec($ch);
+        if (empty($ret)) {
+           curl_close($ch);
+           echo "Message Sent Error";
+        } else {
+           $info         = curl_getinfo($ch);
+           $curlresponse = curl_exec($ch);
+           
+           curl_close($ch);
+          return response()->json(['success' => true,'data' => $curlresponse, 'otp'=>$randomnumber , 'msg' => 'Message sent successfully.']);
+  
+        }
+    }
+
+    public function postals($postal_code){
+        $postals = Postal::where(['pin_code' => $postal_code])->get();
+        return response()->json(['success' => true,'data' => $postals, 'msg' => 'Postals retrieved successfully.']);
+
+    }
+
+    //get individual order
+    public function userOrderItem($id)
+    {
+      $orderItems = OrderItem::where(['order_id' => $id])->get();
+      return response()->json(['success' => true,'data' => $orderItems, 'msg' => 'Order Item retrieved successfully.']);
     }
 
 }

@@ -47,3 +47,7 @@ Route::middleware('auth:api')->group( function () {
 Route::middleware('auth:api')->group( function () {
 	Route::resource('orders', 'API\OrdersController');
 });
+
+Route::middleware('auth:api')->group( function () {
+	Route::post('pay_status/{order_id}/{pay_status}', 'API\OrdersController@paidStatus');	
+});

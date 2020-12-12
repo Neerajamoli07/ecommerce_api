@@ -12,6 +12,7 @@
             <th>Name</th>
             <th>Brand</th>
             <th>Size</th>
+            <th>Size Price</th>
             <th>Category</th>
             <th>Stock</th>
             <th>Price</th>
@@ -31,13 +32,14 @@
                 <td>{{ $p->name}}</td>
                 <td>{{ $p->brands->brand }}</td>
                 <td>{{implode(",", $p->size->pluck("size")->all())}}</td>
+                <td>{{ $p->rate }}</td>
                 <td>{{ $p->category->cat }}</td>
                 <td>{{ $p->quantity }}</td>
                 <td>{{ $p->price }}</td>
 
                 <td><img src="{{asset('images/products/'.$p->a_img)}}" height="35" width="25"></td>
-                <td><img src="{{asset('images/products/'.$p->b_img)}}" height="35" width="25"></td>
-                <td><img src="{{asset('images/products/'.$p->c_img)}}" height="35" width="25"></td>
+                <!-- <td><img src="{{asset('images/products/'.$p->b_img)}}" height="35" width="25"></td>
+                <td><img src="{{asset('images/products/'.$p->c_img)}}" height="35" width="25"></td> -->
                 <td>{{ $p->fresh_product_date }}</td>
                 <td><a href="{{route('articles.show',$p->id)}}" class="btn btn-primary">Read</a></td>
                 <td><a href="{{route('articles.edit',$p->id)}}" class="btn btn-warning">Update</a></td>

@@ -34,6 +34,18 @@
     @slot('icon')icon fa fa-list-alt @endslot
     @slot('name')Subcategories @endslot
     @endcomponent
+
+    <li class="menu">
+        <a href="/backend/postals">
+            <span class="icon fa fa-th-large"></span><span class="title">Delivery Cost</span>
+        </a>
+    </li>
+
+    <li class="menu">
+        <a href="/backend/notifications/create">
+            <span class="icon fa fa-th-large"></span><span class="title">Notifications</span>
+        </a>
+    </li>
     
     <li class="  panel panel-default dropdown">
     <a data-toggle="collapse" href="#dropdown-table">

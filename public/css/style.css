@@ -3604,7 +3604,7 @@ table tr.cart_item td.product-subtotal {
 /*-----------------------------------------------------------------------------------*/
 .my_account {
 	padding-top:250px;
-	background-image:url(../images/my_account_bg.jpg);
+	background-image:url(../images/app_logo.jpg);
 }
 
 .my_account_block {background-color:#fff; margin-bottom:54px;}
@@ -3623,17 +3623,14 @@ table tr.cart_item td.product-subtotal {
 .login_form input[type="text"] {
 	height:50px;
 	margin-bottom:20px;
-	text-transform:uppercase;
 }
 .login_form input[type="email"] {
 	height:50px;
 	margin-bottom:20px;
-	text-transform:uppercase;
 }
 .login_form input[type="password"] {
 	height:50px;
 	margin-bottom:20px;
-	text-transform:uppercase;
 }
 .login_form input[type="text"].last {margin-bottom:9px;}
 /*.login_form input[type="checkbox"] + label {

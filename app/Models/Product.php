@@ -27,11 +27,11 @@ class Product extends Model
         'name',
         'description',
         'a_img',
-        'brand_id',
         'cat_id',
         'quantity',
         'price',
-        'fresh_product_date'
+        'fresh_product_date',
+        'rate'
     ];
 
     /**

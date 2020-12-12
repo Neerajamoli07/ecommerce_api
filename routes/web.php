@@ -38,11 +38,21 @@ Route::get('/aboutus', 'MainController@aboutus');
 
 Route::get('/products', 'MainController@products');
 
+Route::get('/sendOtp/{mobileno}', 'MainController@sendOtp');
+
+Route::get('/postals/{postal_code}', 'MainController@postals');
+
 Route::get('/productCategories', 'MainController@productCategories');
 
 Route::get('/categoryProduct/{id}', 'MainController@categoryProduct');
 
+Route::get('/userOrderItem/{id}', 'MainController@userOrderItem');
+
 Route::get('/cms', 'MainController@index');
+
+Route::get('/pay/{order_id}', 'PayController@pay');
+
+Route::post('/meTranPay', 'PayController@meTranPay');
 
 Route::get('/contacts', 'MainController@contacts');
 
@@ -120,4 +130,9 @@ Route::middleware('admin:admin')
         Route::resource('users', 'UsersController');
         Route::get('articles/search', 'ArticlesController@search');
         Route::resource('articles', 'ArticlesController');
+
+        Route::resource('postals', 'PostalController');
+        Route::resource('notifications', 'NotificationController');
     });
+
+    Route::resource('delivery', 'DeliveryUserController');

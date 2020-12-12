@@ -29,6 +29,9 @@ class Order extends Model
         'color',
         'quantity',
         'amount',
+        'pay_status',
+        'order_status',
+        'pay_type',
         'delivery_time',
         'delivery_date',
         'delivery_address'

@@ -20,7 +20,7 @@
 @foreach ($products as $p)
     <?php $brands = $p->brands->pluck('brand', 'brand_id') ?>
 @endforeach
-<div class="form-group">
+<div class="form-group" style="display: none;">
     {!! Form::label('Brand', 'Brand:') !!}
     {!! Form::select('brand_id', $brands, null, ['id' => 'brand_id','class'=>'form-control'])!!}
 </div>
@@ -28,6 +28,7 @@
     @foreach ($checkbox as $s)
         {!! Form::label($s->size_id,$s->size) !!}
         {!! Form::checkbox( 'size[]',$s->size_id, null,['id' => $s['size_id'],'class' => 'md-check'])!!}
+        {!! Form::text('rate[]',"",['placeholder'=>'Enter Rate']) !!}
     @endforeach
 </div>
 @foreach ($products as $p)
