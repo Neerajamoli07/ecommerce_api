@@ -16,7 +16,7 @@
                   <form method="POST" action="/backend/notifications" accept-charset="UTF-8" enctype="multipart/form-data">
                     {{ csrf_field() }}
                      <div class="form-group">
-                        <a href="/backend/notification" class="btn btn-primary">Back</a>
+                        <a href="/backend/notifications" class="btn btn-primary">Back</a>
                      </div>
                      <div class="form-group">
                         <label for="Name">Notification Title:</label>

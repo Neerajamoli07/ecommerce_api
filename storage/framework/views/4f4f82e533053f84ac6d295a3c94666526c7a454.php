@@ -44,6 +44,7 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                      </tbody>
                   </table>
+                  <?php echo e($notifications->links()); ?>
 
                   
                   <div class="row">

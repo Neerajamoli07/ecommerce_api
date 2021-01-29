@@ -16,7 +16,7 @@
                     <?php echo e(csrf_field()); ?>
 
                      <div class="form-group">
-                        <a href="/backend/notification" class="btn btn-primary">Back</a>
+                        <a href="/backend/notifications" class="btn btn-primary">Back</a>
                      </div>
                      <div class="form-group">
                         <label for="Name">Notification Title:</label>

@@ -42,7 +42,7 @@
     </li>
 
     <li class="menu">
-        <a href="/backend/notifications/create">
+        <a href="/backend/notifications">
             <span class="icon fa fa-th-large"></span><span class="title">Notifications</span>
         </a>
     </li>

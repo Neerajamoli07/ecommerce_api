@@ -44,7 +44,7 @@
                         @endforeach
                      </tbody>
                   </table>
-
+                  {{ $notifications->links() }}
                   
                   <div class="row">
                   </div>
