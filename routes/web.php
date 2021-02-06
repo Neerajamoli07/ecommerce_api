@@ -68,6 +68,8 @@ Route::get('search/autocomplete', 'MainController@autocomplete');
 
 Route::get('/filter/{slug}/{id}', 'MainController@filter');
 
+Route::post('/update_delivery_user', 'MainController@updateDeliveryUser');
+
 Route::middleware('admin:user')
     ->group(function () {
         Route::get('cart', 'ShoppingController@index');

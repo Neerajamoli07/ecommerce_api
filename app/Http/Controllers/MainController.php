@@ -8,6 +8,10 @@ use App\Models\Category;
 use App\Postal;
 use App\Models\Size;
 use App\Models\OrderItem;
+use App\Models\RoleUser;
+use App\User;
+use App\Models\Order;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -238,8 +242,21 @@ class MainController extends Controller
     //get individual order
     public function userOrderItem($id)
     {
+      //get orders item   
       $orderItems = OrderItem::where(['order_id' => $id])->get();
-      return response()->json(['success' => true,'data' => $orderItems, 'msg' => 'Order Item retrieved successfully.']);
+      //get delivery boy id here
+      $delivery_users_ids = RoleUser::where(['role_id' => 3])->get();
+      $user_ids = array();
+      foreach($delivery_users_ids as $index=>$record){
+          $user_ids[] = $record->user_id;
+      }
+      $users = User::whereIn('id', $user_ids)->get();
+      return response()->json(['success' => true,'data' => $orderItems, 'delivery_users_ids'=> $users, 'msg' => 'Order Item retrieved successfully.']);
+    }
+
+    public function updateDeliveryUser(Request $request){
+        $updateOrder = Order::where("id", $request->order_id)->update(["delivery_user_id" => $request->user_id]);
+        return response()->json(['success' => true,'data' => $updateOrder, 'msg' => 'Delivery user updated successfully.']);
     }
 
 }

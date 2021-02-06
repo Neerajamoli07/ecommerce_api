@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css')}}">
 @extends('backend/tblTemplate')
 @section('title',$title)
@@ -36,18 +37,21 @@
 $(document).ready(function(){
     $.noConflict();
     $(document).on('click','tr',function(){
-        let data = $(this).find("td:eq(0)").text();
+        let order_id = $(this).find("td:eq(0)").text();
         
         $(this).find("td:eq(0)").css("color","red");
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "/userOrderItem/"+data,
+            url: "/userOrderItem/"+order_id,
             success: function (data) { 
+                console.log("NEERAJ ",data);
                 orderItem = data.data;
+                delivery_user = data.delivery_users_ids;
+
                 itemLength = orderItem.length;
-                console.log("Neeraj ",orderItem);
-                console.log("Neeraj ", itemLength);
+                delivery_user_length = delivery_user.length;
+
                 html = '';
                 for(i=0;i<itemLength;i++){
                   html +='<p>Id:  ' +orderItem[i]['id'] + '</p>'+
@@ -59,6 +63,14 @@ $(document).ready(function(){
                          '<p>Additional Info:  ' +orderItem[i]['additional_info'] + '</p>'+
                          '<br>'
                 }
+                
+                option = '<select id="delivery_user" data-order_id="'+ order_id+'"><option value="">Select</option>';
+                for(j=0;j<delivery_user_length;j++){
+                    option +='<option value="'+ delivery_user[j]['id'] +'">' +delivery_user[j]['name'] + '</option>'
+                }
+                option += '<select>';
+                html += '<p>Select Delivery Boy:  ' + option + '</p>'
+                console.log("Neeraj ",option);
                 $('#orderItems').html('');
                 $('#orderItems').html(html);
                 $('#myModal').modal('show');
@@ -68,6 +80,31 @@ $(document).ready(function(){
             }
         });
     })
+
+   //map delivery user id to order id
+   $(document).on('change','#delivery_user',function(){
+     let user_id = $(this).val();
+     let order_id = $('#delivery_user').data('order_id');
+     let _token   = $('meta[name="csrf-token"]').attr('content');
+
+     $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/update_delivery_user",
+            data: {_token: _token,order_id: order_id, user_id: user_id},
+            success: function (data) { 
+                console.log("AMOLI ",data);
+                if(data){
+                 alert(data.msg);
+                }
+                
+            },
+            error: function (data) { 
+                console.log("Amoli ",data);
+            }
+        });
+   });
+
 })
 </script>
 @endsection
